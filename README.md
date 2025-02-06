@@ -1,8 +1,17 @@
 # Team Project
 
 ## Prerequisites
+### Software
 * [NodeJS](https://nodejs.org/en)
 * [VSCode](https://code.visualstudio.com/)
+
+### Packages
+* Go to 
+* run `npm install react-scripts`
+* run `npm install nodemon`
+* run `npm install mongodb`
+
+
 
 ## How to run the client
 
@@ -32,5 +41,8 @@
 
 ## nodemon: command not found
 * run `npm install nodemon`
+
+# install mongodb
+run `npm install mongodb`
 
 Created by Ellis Ollier, Dylan Parkinson, Khaled Husain, Josh Roberts, Josh Thompson and Mian Ghous
