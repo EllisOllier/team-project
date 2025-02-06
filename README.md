@@ -6,12 +6,8 @@
 * [VSCode](https://code.visualstudio.com/)
 
 ### Packages
-* Go to 
-* run `npm install react-scripts`
-* run `npm install nodemon`
-* run `npm install mongodb`
-
-
+* run `cd client` > `npm install react-scripts`
+* run `cd server` > `npm install nodemon`
 
 ## How to run the client
 
