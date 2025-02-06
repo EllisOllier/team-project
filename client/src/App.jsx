@@ -3,14 +3,15 @@ import NavBar from './NavBar';
 import {useState, useEffect} from "react";
 
 // function imports
-import { getTest } from './functions/test'; 
+import { getApiCheck } from './functions/getApiCheck'; 
+
 
 
 function App() {
   const [data, setData] = useState("offline");
 
   useEffect(() => {
-    getTest()
+    getApiCheck()
       .then((res) => {
         setData(res.message);
       })
@@ -19,9 +20,9 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar></NavBar>
       <h1>Finance Tracker for Students</h1>
       <p>API Status: {data}</p>
-      <NavBar></NavBar>
     </div>
   );
 }

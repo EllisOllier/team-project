@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 // import controllers
-const {getTest} = require('../controllers/test')
+const {getApiCheck} = require('../controllers/api-check')
 
 // import middlewares
 
 // api routes
-router.get('/test', getTest);
+router.get('/api-check', getApiCheck);
 
 module.exports = router;

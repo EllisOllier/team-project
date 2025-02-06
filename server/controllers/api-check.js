@@ -1,4 +1,4 @@
-exports.getTest = async (req, res) => {
+exports.getApiCheck = async (req, res) => {
     res.status(200).json({
         message: 'online',
     });
