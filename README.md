@@ -27,4 +27,10 @@
 <br/> **or**
 * Visit [here](https://stackoverflow.com/questions/44435697/change-the-default-terminal-in-visual-studio-code) to change default terminal.
 
+## react-scripts: command not found
+* run `npm install react-scripts`
+
+## nodemon: command not found
+* run `npm install nodemon`
+
 Created by Ellis Ollier, Dylan Parkinson, Khaled Husain, Josh Roberts, Josh Thompson and Mian Ghous
