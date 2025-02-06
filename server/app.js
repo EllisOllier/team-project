@@ -9,6 +9,7 @@ require("dotenv").config();
 const app = express();
 
 // db
+/*
 const uri = process.env.MONGODB_URI || "mongodb+srv://studentFinanceAdmin:StuFinTracker@cluster0.a38cu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri, {
     serverApi: {
@@ -38,7 +39,7 @@ process.on('SIGINT', async () => {
     console.log("MongoDB client disconnected");
     process.exit(0);
 });
-
+*/
 // middleware
 app.use(morgan("dev"));
 app.use(cors({origin : true, credentials : true}));
