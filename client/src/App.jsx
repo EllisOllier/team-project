@@ -1,4 +1,5 @@
 import './App.css';
+import NavBar from './NavBar';
 import {useState, useEffect} from "react";
 
 // function imports
@@ -20,6 +21,7 @@ function App() {
     <div className="App">
       <h1>Finance Tracker for Students</h1>
       <p>API Status: {data}</p>
+      <NavBar></NavBar>
     </div>
   );
 }
