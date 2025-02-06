@@ -1,29 +1,22 @@
-import './App.css';
-import NavBar from './NavBar';
-import {useState, useEffect} from "react";
-
-// function imports
-import { getApiCheck } from './functions/getApiCheck'; 
-
-
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Home from './pages/Home';
+import About from './pages/About';
+import Services from './pages/Services';
+import Contact from './pages/Contact';
 
 function App() {
-  const [data, setData] = useState("offline");
-
-  useEffect(() => {
-    getApiCheck()
-      .then((res) => {
-        setData(res.message);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
   return (
-    <div className="App">
-      <NavBar></NavBar>
-      <h1>Finance Tracker for Students</h1>
-      <p>API Status: {data}</p>
-    </div>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
   );
 }
 
