@@ -6,7 +6,7 @@ import { getTest } from './functions/test';
 
 
 function App() {
-  const [data, setData] = useState("Crypto Project");
+  const [data, setData] = useState("offline");
 
   useEffect(() => {
     getTest()
@@ -18,7 +18,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>{data}</h1>
+      <h1>Finance Tracker for Students</h1>
+      <p>API Status: {data}</p>
     </div>
   );
 }
