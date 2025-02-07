@@ -47,10 +47,16 @@
 # install mongodb
 run `npm install mongodb`
 
-# How to install git on MacOS
+# How to install git
+Go to [here](https://www.theodinproject.com/lessons/foundations-setting-up-git) and follow the guide which will walk you through how to setup git
 
-* run `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-* run `brew install git`
-* check git version with `git --version`
+# How to install the repository
+* Open terminal
+* Go to [here](https://github.com/EllisOllier/team-project)
+* Press Code
+* If you followed the git install guide above them press ssh and copy it otherwise press HTTPS and copy it
+* Go to terminal
+* Run `git clone PASTEHERE` (Replace PASTEHERE with the copied string from github)
+
 
 Created by Ellis Ollier, Dylan Parkinson, Khaled Husain, Josh Roberts, Josh Thompson and Mian Ghous
