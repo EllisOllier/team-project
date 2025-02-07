@@ -1,23 +1,57 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Contact from './pages/Contact';
+// import modules
+const express = require("express");
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const morgan = require("morgan");
+const cors = require("cors");
+require("dotenv").config();
 
-function App() {
-  return (
-    <Router>
-      <NavBar />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/services" component={Services} />
-        <Route path="/contact" component={Contact} />
-      </Switch>
-    </Router>
-  );
+// app
+const app = express();
+
+// db
+/*
+const uri = process.env.MONGODB_URI || "mongodb+srv://studentFinanceAdmin:StuFinTracker@cluster0.a38cu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const client = new MongoClient(uri, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
+});
+
+async function run() {
+    try {
+        // Connect the client to the server
+        await client.connect();
+        // Send a ping to confirm a successful connection
+        await client.db("admin").command({ ping: 1 });
+        console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    } catch (error) {
+        console.error("Failed to connect to MongoDB:", error);
+    }
 }
 
-export default App;
+run().catch(console.dir);
+
+// Keep the client connected for the duration of the app's runtime
+process.on('SIGINT', async () => {
+    await client.close();
+    console.log("MongoDB client disconnected");
+    process.exit(0);
+});
+*/
+// middleware
+app.use(morgan("dev"));
+app.use(cors({origin : true, credentials : true}));
+
+// routes
+const checkApi = require("./routes/api-check");
+app.use("/", checkApi);
+
+// port
+const port = process.env.PORT || 8080;
+
+// listener
+const server = app.listen(port, () => 
+    console.log(`Server is running on ${port}`)
+);
