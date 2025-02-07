@@ -38,6 +38,12 @@
 ## nodemon: command not found
 * run `npm install nodemon`
 
+## react-router-dom: command not found 
+* run `npm install react-router-dom`
+
+## web-vitals: command not found
+* run `npm install web-vitals`
+
 # install mongodb
 run `npm install mongodb`
 
