@@ -41,4 +41,10 @@
 # install mongodb
 run `npm install mongodb`
 
+# How to install git on MacOS
+
+* run `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+* run `brew install git`
+* check git version with `git --version`
+
 Created by Ellis Ollier, Dylan Parkinson, Khaled Husain, Josh Roberts, Josh Thompson and Mian Ghous
