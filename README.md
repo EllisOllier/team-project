@@ -13,6 +13,15 @@ Go to [here](https://www.theodinproject.com/lessons/foundations-setting-up-git) 
 * run `cd client` > `npm install react-scripts`
 * run `cd server` > `npm install nodemon`
 
+# How to install the repository
+* Ensure all Prerequisites are installed
+* Open terminal
+* Go to [here](https://github.com/EllisOllier/team-project)
+* Press Code
+* If you followed the git install guide above them press ssh and copy it otherwise press HTTPS and copy it
+* Go to terminal
+* Run `git clone PASTEHERE` (Replace PASTEHERE with the copied string from github)
+
 ## How to run the client
 
 * Navigate to the top bar on vscode
@@ -50,13 +59,5 @@ Go to [here](https://www.theodinproject.com/lessons/foundations-setting-up-git) 
 
 # install mongodb
 run `npm install mongodb`
-
-# How to install the repository
-* Open terminal
-* Go to [here](https://github.com/EllisOllier/team-project)
-* Press Code
-* If you followed the git install guide above them press ssh and copy it otherwise press HTTPS and copy it
-* Go to terminal
-* Run `git clone PASTEHERE` (Replace PASTEHERE with the copied string from github)
 
 Created by Ellis Ollier, Dylan Parkinson, Khaled Husain, Josh Roberts, Josh Thompson and Mian Ghous
