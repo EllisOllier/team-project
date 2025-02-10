@@ -1,7 +1,7 @@
 // Import neccessary files
 import React from 'react';
 import { Link } from 'react-router-dom';
-import "../styles/login-form.css";
+import "../styles/main.css";
 
 const LoginForm = () => {
   return (
