@@ -1,15 +1,15 @@
 // Import neccessary files
 import React from 'react';
 
-const About = () => {
+const ExpenseTracker = () => {
   return (
     // Add html below
     <div>
-      <h1>About Page</h1>
-      <p>Learn more about us on this page.</p>
+      <h1>Contact Page</h1>
+      <p>Get in touch with us.</p>
     </div>
     // Add html above
   );
 };
 
-export default About;
+export default ExpenseTracker;
