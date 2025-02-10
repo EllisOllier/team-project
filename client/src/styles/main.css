@@ -11,6 +11,7 @@
   background-color: #333;
   /* TODO: Needs a better fix so all buttons can be seen on screen */
   overflow:auto;
+  display: flex;
 }
 
 .navbar-list, .footer-list {
@@ -19,6 +20,7 @@
   padding: 0;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .navbar-item {
@@ -38,6 +40,24 @@
 
 .navbar-item:last-child {
   margin-left: auto;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .navbar-list {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-item {
+    width: 100%;
+    text-align: left;
+  }
+
+  .navbar-item:last-child {
+    margin-left: 0;
+    text-align: center;
+  }
 }
 
 .footer {
