@@ -1,7 +1,7 @@
 // Import neccessary files
 import React from 'react';
 
-const Services = () => {
+const CurrencyConverter = () => {
   return (
     // Add html below
     <div>
@@ -12,4 +12,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default CurrencyConverter;

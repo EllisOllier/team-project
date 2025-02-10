@@ -1,15 +1,15 @@
 // Import neccessary files
 import React from 'react';
 
-const Contact = () => {
+const BudgetForecasting = () => {
   return (
     // Add html below
     <div>
-      <h1>Contact Page</h1>
-      <p>Get in touch with us.</p>
+      <h1>Services Page</h1>
+      <p>Discover our services here.</p>
     </div>
     // Add html above
   );
 };
 
-export default Contact;
+export default BudgetForecasting;

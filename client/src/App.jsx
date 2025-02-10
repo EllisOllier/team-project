@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Contact from './pages/Contact';
+import Dashboard from './pages/Dashboard';
+import CurrencyConverter from './pages/CurrencyConverter';
+import ExpenseTracker from './pages/Track';
+import BudgetForecasting from './pages/BudgetForecasting';
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/currency-converter" element={<CurrencyConverter />} />
+        <Route path="/expense-tracker" element={<ExpenseTracker />} />
+        <Route path="/budget-forecasting" element={<BudgetForecasting />} />
       </Routes>
       <Footer />
     </Router>
