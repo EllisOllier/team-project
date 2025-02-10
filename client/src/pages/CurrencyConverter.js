@@ -5,8 +5,8 @@ const CurrencyConverter = () => {
   return (
     // Add html below
     <div>
-      <h1>Services Page</h1>
-      <p>Discover our services here.</p>
+      <h1>Currency Converter</h1>
+      <p>A tool to help international students understand their budget on a better level so that management becomes easier.</p>
     </div>
     // Add html above
   );

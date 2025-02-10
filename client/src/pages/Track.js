@@ -5,8 +5,8 @@ const ExpenseTracker = () => {
   return (
     // Add html below
     <div>
-      <h1>Contact Page</h1>
-      <p>Get in touch with us.</p>
+      <h1>ExpenseTracker</h1>
+      <p>A tool for students to help track the amount of money that they spend within a time period.</p>
     </div>
     // Add html above
   );

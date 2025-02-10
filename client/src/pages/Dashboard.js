@@ -5,8 +5,8 @@ const Dashboard = () => {
   return (
     // Add html below
     <div>
-      <h1>About Page</h1>
-      <p>Learn more about us on this page.</p>
+      <h1>Personal Dashboard</h1>
+      <p>Your personalised summary of your recent activity on the website.</p>
     </div>
     // Add html above
   );
