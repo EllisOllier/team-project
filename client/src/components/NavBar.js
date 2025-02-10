@@ -2,8 +2,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/main.css";
+import LoginForm from './LoginForm';
 
 const NavBar = () => {
+  const [isLoginFormVisible, setIsLoginFormVisible] = React.useState(false);
+  const toggleLoginForm = () => {
+    setIsLoginFormVisible(!isLoginFormVisible);
+  };
+
   return (
     // Add html below
     <nav className="navbar">
@@ -13,8 +19,9 @@ const NavBar = () => {
         <li className="navbar-item"><Link to="/currency-converter">Currency Converter</Link></li>
         <li className="navbar-item"><Link to="/expense-tracker">Expense Tracker</Link></li>
         <li className="navbar-item"><Link to="/budget-forecasting">Budget forecasting</Link></li>
-        <li className="navbar-item"><button className='login-button'>Login</button></li>
+        <li className="navbar-item"><button onClick={toggleLoginForm} id='login-button'>Login</button></li>
       </ul>
+      {isLoginFormVisible && (<LoginForm />)}
     </nav>
     // Add html above
   );
