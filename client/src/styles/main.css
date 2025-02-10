@@ -9,7 +9,6 @@
 /* NavBar and Footer Styles  */
 .navbar, .footer {
   background-color: #333;
-  /* TODO: Needs a better fix so all buttons can be seen on screen */
   overflow:auto;
   display: flex;
 }
