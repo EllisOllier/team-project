@@ -19,7 +19,7 @@ function App() {
     // Add html below
     <Router>
       <NavBar />
-
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />

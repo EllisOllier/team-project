@@ -3,4 +3,5 @@
 /client/node_modules
 /server/node_modules
 
-#
+# ignore .DS_Store
+.DS_Store
