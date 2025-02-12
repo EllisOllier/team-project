@@ -153,6 +153,13 @@
   margin-top: 1rem;
 }
 
+@media (max-width: 400px) {
+  .feature-container {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 /* Login form styles */
 .login-form {
   position: fixed;
