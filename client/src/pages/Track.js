@@ -55,7 +55,9 @@ const ExpenseTracker = () => {
 
   return (
     <div>
-      <h2>Expense Tracker</h2>
+       <div className="title-container">
+      <h1>Expense Tracker</h1>
+      </div>
 
       {budget === null ? (
         <button onClick={handleSetBudget}>Set Your Budget</button>
