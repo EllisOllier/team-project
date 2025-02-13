@@ -1,24 +1,27 @@
 import { useState, useEffect } from "react";
 
 const ExpenseTracker = () => {
-  const [budget, setBudget] = useState(null);
-  const [expenses, setExpenses] = useState([]);
+  const [budget, setBudget] = useState(() => {
+    return parseFloat(localStorage.getItem("budget")) || null;
+  });
+
+  const [expenses, setExpenses] = useState(() => {
+    const savedExpenses = localStorage.getItem("expenses");
+    return savedExpenses ? JSON.parse(savedExpenses) : [];
+  });
+
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
 
-  useEffect(() => {
-    const savedBudget = localStorage.getItem("budget");
-    const savedExpenses = localStorage.getItem("expenses");
-
-    if (savedBudget) setBudget(parseFloat(savedBudget));
-    if (savedExpenses) setExpenses(JSON.parse(savedExpenses));
-  }, []);
-
+  // Save budget and expenses whenever they change
   useEffect(() => {
     if (budget !== null) localStorage.setItem("budget", budget);
+  }, [budget]);
+
+  useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [budget, expenses]);
+  }, [expenses]);
 
   const handleSetBudget = () => {
     const userBudget = parseFloat(prompt("Enter your budget:"));
@@ -42,14 +45,15 @@ const ExpenseTracker = () => {
     }
 
     const newExpense = { id: Date.now(), amount: expenseAmount, category, date };
-    setExpenses([...expenses, newExpense]);
+    const updatedExpenses = [...expenses, newExpense];
+
+    setExpenses(updatedExpenses);
     setBudget((prevBudget) => prevBudget - expenseAmount);
     setAmount("");
     setCategory("");
     setDate("");
   };
 
-  // Reset Budget & Expenses
   const resetBudget = () => {
     if (window.confirm("Are you sure you want to reset your budget? This will clear all expenses.")) {
       setBudget(null);
@@ -88,11 +92,15 @@ const ExpenseTracker = () => {
 
           <h3>Expense List</h3>
           <ul>
-            {expenses.map((exp) => (
-              <li key={exp.id}>
-                {exp.date} - {exp.category}: £{exp.amount}
-              </li>
-            ))}
+            {expenses.length > 0 ? (
+              expenses.map((exp) => (
+                <li key={exp.id}>
+                  {exp.date} - {exp.category}: £{exp.amount}
+                </li>
+              ))
+            ) : (
+              <p>No expenses added yet.</p>
+            )}
           </ul>
 
           <button onClick={resetBudget} style={{ backgroundColor: "red", color: "white", marginTop: "10px" }}>
