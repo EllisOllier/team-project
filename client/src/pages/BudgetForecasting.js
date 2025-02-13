@@ -30,9 +30,8 @@ const BudgetForecasting = () => {
     <div>
       <div className="title-container">
         <h1>Budget Forecasting</h1>
+        <h3>A guide to help with managing your budget throughout the semester.</h3>
       </div>
-      <p>A guide to help with managing your budget throughout the semester.</p>
-      <br />
       <h2>Summary</h2>
       <br />
       <h3>Current Balance</h3>
