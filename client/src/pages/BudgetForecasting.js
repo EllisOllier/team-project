@@ -5,7 +5,9 @@ const BudgetForecasting = () => {
   return (
     // Add html below
     <div>
-      <h1>Budget Forecasting Page</h1>
+       <div className="title-container">
+      <h1>Budget Forecasting</h1>
+      </div>
       <p>A guide to help with managing your budget throughout the semester.</p>
       <br></br>
       <br></br>
@@ -20,7 +22,7 @@ const BudgetForecasting = () => {
       (// insert code here)
       <br></br>
       <br></br>
-      <h2>forecast chart</h2>
+      <h2>Forecast chart</h2>
       <br></br>
       (// insert chart here)
       <br></br>
