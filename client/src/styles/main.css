@@ -177,3 +177,13 @@
   border: 1px solid black;
   border-radius: 20px;
 }
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10em;
+  padding-bottom: 18em;
+}

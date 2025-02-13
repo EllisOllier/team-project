@@ -1,61 +1,83 @@
 import React, { useState } from "react";
+import Freecurrencyapi from '@everapi/freecurrencyapi-js';
 import "../styles/main.css";
 
 const CurrencyConverter = () => {
-  const [amount, setAmount] = useState(1);
-  const [fromCurrency, setFromCurrency] = useState("GBP");
-  const [toCurrency, setToCurrency] = useState("EUR");
-  const [convertedAmount, setConvertedAmount] = useState(null);
-
-  // Example exchange rates (static for simplicity)
-  const exchangeRates = {
-    GBP: { EUR: 1.15, USD: 1.27 },
-    EUR: { GBP: 0.87, USD: 1.10 },
-    USD: { GBP: 0.79, EUR: 0.91 },
+  const currencyApi = new Freecurrencyapi('fca_live_7IzkWSy6LsA5XsnsG6t7ldzmhfHHJGG3om5pODDr');
+  
+  const [isOutputMessageVisible, setIsOutputMessageVisible] = React.useState(false);
+  const toggleOutputMessageVisibility = () => {
+    setIsOutputMessageVisible(isOutputMessageVisible);
   };
 
-  const convertCurrency = () => {
-    if (fromCurrency === toCurrency) {
-      setConvertedAmount(amount);
-    } else {
-      const rate = exchangeRates[fromCurrency]?.[toCurrency] || 1;
-      setConvertedAmount((amount * rate).toFixed(2));
-    }
-  };
+  const currencies = [
+    { code: "GBP", symbol: "£" },
+    { code: "EUR", symbol: "€" },
+    { code: "USD", symbol: "$" },
+    { code: "JPY", symbol: "¥" },
+    { code: "AUD", symbol: "A$" },
+    { code: "CAD", symbol: "C$" },
+    { code: "CHF", symbol: "CHF" },
+    { code: "CNY", symbol: "¥" },
+    { code: "SEK", symbol: "kr" },
+    { code: "NZD", symbol: "NZ$" },
+    // Add more currencies as needed
+  ];
+
+  function getConverionRate() {
+    const baseCurrency = document.getElementById('from-currency').value;
+    const conversionCurrency = document.getElementById('to-currency').value;
+    currencyApi.latest({
+      base_currency: baseCurrency, // from currency
+      currencies: conversionCurrency // to currency
+    }).then(response => {
+      convertCurrency(response)
+    })
+  }
+
+  function convertCurrency(conversion) { // conversion variable passed from response on getConversionRate()
+    const currencyAmount = document.getElementById('amount-currency').value;
+    const toCurrency = document.getElementById('to-currency').value;
+
+    const convertedAmount = conversion.data[toCurrency] * currencyAmount;
+    const outputElement = document.getElementById('converted-amount');
+
+    outputElement.textContent = `Converted Amount: ${(Math.round(convertedAmount * 100) / 100).toString()}`;
+  }
 
   return (
     <div>
       <div className="title-container">
-      <h1>Currency Converter</h1>
+        <h1>Currency Converter</h1>
+        <h3>From A to B with ease</h3>
       </div>
-      <input
-        type="number"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
-      
-      <label for="from-currency">from currency</label>
-      <select id="from-currency" value={fromCurrency} onChange={(e) => setFromCurrency(e.target.value)}>
-        <option value="GBP">GBP (£)</option>
-        <option value="EUR">EUR (€)</option>
-        <option value="USD">USD ($)</option>
-      </select>
+      <div className="main-content">
+        <label htmlFor="amount-currency">Enter amount: <input id="amount-currency" type="number" /></label>
+        <div className="currency-from-to-container">
+          <label htmlFor="from-currency">from currency</label>
+          <select id="from-currency">
+            {currencies.map(currency => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code} ({currency.symbol})
+              </option>
+            ))}
+          </select>
 
-      <span> → </span>
+          <span> → </span>
 
-      <select value={toCurrency} onChange={(e) => setToCurrency(e.target.value)}>
-        <option value="GBP">GBP (£)</option>
-        <option value="EUR">EUR (€)</option>
-        <option value="USD">USD ($)</option>
-      </select>
+          <label htmlFor="to-currency">to currency</label>
+          <select id="to-currency">
+            {currencies.map(currency => (
+              <option key={currency.code} value={currency.code}>
+                {currency.code} ({currency.symbol})
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <button className="signup-button"onClick={convertCurrency}>Convert</button>
-
-      {convertedAmount !== null && (
-        <p>
-          {amount} {fromCurrency} = {convertedAmount} {toCurrency}
-        </p>
-      )}
+        <button className="signup-button" onClick={getConverionRate}>Convert</button>
+        <p id="converted-amount">Converted Amount: 0</p>
+      </div>
     </div>
   );
 };
