@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 
 const ExpenseTracker = () => {
-  const [budget, setBudget] = useState(null); // Initially null to prompt user input
+  const [budget, setBudget] = useState(null);
   const [expenses, setExpenses] = useState([]);
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
 
-  // Load saved budget and expenses from local storage
   useEffect(() => {
     const savedBudget = localStorage.getItem("budget");
     const savedExpenses = localStorage.getItem("expenses");
@@ -16,13 +15,11 @@ const ExpenseTracker = () => {
     if (savedExpenses) setExpenses(JSON.parse(savedExpenses));
   }, []);
 
-  // Save budget and expenses whenever they change
   useEffect(() => {
     if (budget !== null) localStorage.setItem("budget", budget);
     localStorage.setItem("expenses", JSON.stringify(expenses));
   }, [budget, expenses]);
 
-  // Set initial budget
   const handleSetBudget = () => {
     const userBudget = parseFloat(prompt("Enter your budget:"));
     if (isNaN(userBudget) || userBudget <= 0) {
@@ -32,7 +29,6 @@ const ExpenseTracker = () => {
     setBudget(userBudget);
   };
 
-  // Add new expense
   const addExpense = () => {
     if (!amount || !category || !date) {
       alert("Please fill all fields.");
@@ -47,16 +43,26 @@ const ExpenseTracker = () => {
 
     const newExpense = { id: Date.now(), amount: expenseAmount, category, date };
     setExpenses([...expenses, newExpense]);
-    setBudget((prevBudget) => prevBudget - expenseAmount); // Deduct from budget
+    setBudget((prevBudget) => prevBudget - expenseAmount);
     setAmount("");
     setCategory("");
     setDate("");
   };
 
+  // Reset Budget & Expenses
+  const resetBudget = () => {
+    if (window.confirm("Are you sure you want to reset your budget? This will clear all expenses.")) {
+      setBudget(null);
+      setExpenses([]);
+      localStorage.removeItem("budget");
+      localStorage.removeItem("expenses");
+    }
+  };
+
   return (
     <div>
-       <div className="title-container">
-      <h1>Expense Tracker</h1>
+      <div className="title-container">
+        <h1>Expense Tracker</h1>
       </div>
 
       {budget === null ? (
@@ -88,6 +94,10 @@ const ExpenseTracker = () => {
               </li>
             ))}
           </ul>
+
+          <button onClick={resetBudget} style={{ backgroundColor: "red", color: "white", marginTop: "10px" }}>
+            Reset Budget
+          </button>
         </>
       )}
     </div>
