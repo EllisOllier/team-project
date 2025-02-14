@@ -52,6 +52,7 @@ const CurrencyConverter = () => {
         <h3>From A to B with ease</h3>
       </div>
       <div className="main-content">
+        <div className="currency-converter-container">
         <label htmlFor="amount-currency">Enter amount: <input id="amount-currency" type="number" /></label>
         <div className="currency-from-to-container">
           <label htmlFor="from-currency">from currency</label>
@@ -74,9 +75,11 @@ const CurrencyConverter = () => {
             ))}
           </select>
         </div>
-
-        <button className="signup-button" onClick={getConverionRate}>Convert</button>
-        <p id="converted-amount">Converted Amount: 0</p>
+        <div className="currency-output-container">
+          <button className="convert-button" onClick={getConverionRate}>Convert</button>
+          <p id="converted-amount">Converted Amount: 0</p>
+        </div>
+        </div>
       </div>
     </div>
   );

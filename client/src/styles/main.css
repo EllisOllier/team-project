@@ -257,11 +257,41 @@
 
 .main-content {
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10em;
-  padding-bottom: 18em;
+  padding: 5em;
+  height: 100vh;
+}
+
+.currency-converter-container {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 5px 5px 0px 0px black;
+}
+
+.currency-output-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.convert-button {
+  text-align: center;
+  padding: 0.5rem;
+  width: 25%;
+  max-width: 150px;
+  border-radius: 20px;
+  border: none;
+  color: whitesmoke;
+  background-color: #1fcc04;
+}
+
+#converted-amount {
+  margin-left: 10px;
 }
 
 /* Light Mode (Default) */
