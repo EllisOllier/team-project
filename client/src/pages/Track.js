@@ -14,6 +14,9 @@ const ExpenseTracker = () => {
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
 
+  const [sortBy, setSortBy] = useState("date"); // Default sorting by date
+  const [filterByCategory, setFilterByCategory] = useState("");
+
   // Save budget and expenses whenever they change
   useEffect(() => {
     if (budget !== null) localStorage.setItem("budget", budget);
@@ -63,6 +66,22 @@ const ExpenseTracker = () => {
     }
   };
 
+  // Sorting expenses based on selection
+  const sortedExpenses = [...expenses].sort((a, b) => {
+    if (sortBy === "amount") {
+      return b.amount - a.amount; // Sort by highest amount
+    } else if (sortBy === "category") {
+      return a.category.localeCompare(b.category); // Alphabetical order
+    } else {
+      return new Date(a.date) - new Date(b.date); // Sort by date (default)
+    }
+  });
+
+  // Filtering expenses by category
+  const filteredExpenses = filterByCategory
+    ? sortedExpenses.filter(exp => exp.category === filterByCategory)
+    : sortedExpenses;
+
   return (
     <div>
       <div className="title-container">
@@ -90,16 +109,37 @@ const ExpenseTracker = () => {
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           <button className="signup-button" onClick={addExpense}>Add Expense</button>
 
+          <h3>Sort & Filter</h3>
+          <div>
+            <label>Sort By: </label>
+            <select onChange={(e) => setSortBy(e.target.value)}>
+              <option value="date">Date</option>
+              <option value="amount">Amount</option>
+              <option value="category">Category</option>
+            </select>
+
+            <label> Filter by Category: </label>
+            <select onChange={(e) => setFilterByCategory(e.target.value)}>
+              <option value="">All</option>
+              {expenses
+                .map(exp => exp.category)
+                .filter((v, i, a) => a.indexOf(v) === i) // Remove duplicates
+                .map(category => (
+                  <option key={category} value={category}>{category}</option>
+                ))}
+            </select>
+          </div>
+
           <h3>Expense List</h3>
           <ul>
-            {expenses.length > 0 ? (
-              expenses.map((exp) => (
+            {filteredExpenses.length > 0 ? (
+              filteredExpenses.map((exp) => (
                 <li key={exp.id}>
                   {exp.date} - {exp.category}: £{exp.amount}
                 </li>
               ))
             ) : (
-              <p>No expenses added yet.</p>
+              <p>No expenses match the criteria.</p>
             )}
           </ul>
 
