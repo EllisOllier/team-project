@@ -16,8 +16,8 @@ const DarkModeToggle = () => {
   }, [isDarkMode]);
 
   return (
-    <button onClick={() => setIsDarkMode(!isDarkMode)}>
-      {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+    <button id="toggleDarkMode-Button" onClick={() => setIsDarkMode(!isDarkMode)}>
+      {isDarkMode ? "☀️" : "🌙"}
     </button>
   );
 };
