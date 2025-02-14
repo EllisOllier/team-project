@@ -4,7 +4,6 @@ import LoginForm from "./LoginForm"; // Ensure the correct path
 import { Link } from 'react-router-dom';
 import "../styles/main.css";
 import DarkModeToggle from './DarkModeToggle'; // Import Dark Mode Toggle
-import LoginForm from './LoginForm';
 
 const NavBar = () => {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
