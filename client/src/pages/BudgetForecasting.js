@@ -1,12 +1,10 @@
-// Import necessary files
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const BudgetForecasting = () => {
   const [budget, setBudget] = useState(0);
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
-    // Load budget and expenses from localStorage
     const savedBudget = localStorage.getItem("budget");
     const savedExpenses = localStorage.getItem("expenses");
 
@@ -19,7 +17,7 @@ const BudgetForecasting = () => {
   const currentBalance = budget - totalSpent;
 
   // Calculate average daily spending
-  const daysTracked = new Set(expenses.map(exp => exp.date)).size || 1;
+  const daysTracked = new Set(expenses.map((exp) => exp.date)).size || 1;
   const avgDailySpending = totalSpent / daysTracked;
 
   // Forecasted balances
@@ -30,26 +28,20 @@ const BudgetForecasting = () => {
     <div>
       <div className="title-container">
         <h1>Budget Forecasting</h1>
-        <h3>A guide to help with managing your budget throughout the semester.</h3>
+        <h3>Plan your finances based on past spending.</h3>
       </div>
-      <h2>Summary</h2>
-      <br />
+
       <h3>Current Balance</h3>
       <p>£{currentBalance.toFixed(2)}</p>
-      <br />
+
       <h3>Forecasted Balance</h3>
-      <p>Based on your spending habits.</p>
-      <br />
-      <h2>Forecast Chart</h2>
-      <br />
-      {/* Insert chart component here */}
-      <br />
-      <p>Forecasted balance in 1 week:</p>
+      <p>Based on your spending trends:</p>
+
+      <h4>In 1 Week:</h4>
       <p>£{forecast1Week.toFixed(2)}</p>
-      <br />
-      <p>Forecasted balance in 1 month:</p>
+
+      <h4>In 1 Month:</h4>
       <p>£{forecast1Month.toFixed(2)}</p>
-      <br />
     </div>
   );
 };
