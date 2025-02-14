@@ -11,10 +11,14 @@ const app = express();
 // middleware
 app.use(morgan("dev"));
 app.use(cors({origin : true, credentials : true}));
+app.use(express.json()); // Add this line to parse JSON request bodies
 
 // routes
 const checkApi = require("./routes/api-check");
 app.use("/", checkApi);
+
+const validateLogin = require("./routes/validate-login");
+app.use("/", validateLogin);
 
 // port
 const port = process.env.PORT || 8080;
