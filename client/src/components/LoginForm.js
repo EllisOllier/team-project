@@ -1,6 +1,6 @@
 // Import neccessary files
 import {React, useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../styles/main.css";
 
 
@@ -8,6 +8,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate(); // Create a navigation function
 
   const checkLogin = async (event) => {
     event.preventDefault();
@@ -28,6 +29,7 @@ const LoginForm = () => {
         setErrorMessage('');
         console.log('Login successful', result);
         // Redirect or perform further actions here
+        navigate("/Dashboard");
       } else {
         // Login failed
         setErrorMessage(result.error || 'Invalid username or password');
