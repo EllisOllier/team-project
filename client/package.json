@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@everapi/freecurrencyapi-js": "^1.0.1",
+    "@supabase/supabase-js": "^2.48.1",
     "cra-template": "1.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

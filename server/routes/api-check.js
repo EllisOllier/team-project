@@ -8,5 +8,8 @@ const {getApiCheck} = require('../controllers/api-check')
 
 // api routes
 router.get('/api-check', getApiCheck);
+router.use((req, res) => {
+  res.status(404).json({ error: 'Not Found' });
+});
 
 module.exports = router;
