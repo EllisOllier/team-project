@@ -402,6 +402,7 @@ body {
 .budget-forecasting {
   padding: 20px;
   max-width: 500px;
+  height: 100vh;
   margin: auto;
   text-align: center;
   border: 1px solid var(--border-color);

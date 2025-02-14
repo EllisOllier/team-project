@@ -37,28 +37,31 @@ const BudgetForecasting = () => {
   }, [forecast1Week, forecast1Month]);
 
   return (
-    <div className="budget-forecasting">
-      <h1>Budget Forecasting</h1>
-      <h3>Plan your finances based on past spending.</h3>
-
-      <div className="info-box">
-        <h3>Current Balance</h3>
-        <p className={currentBalance < 0 ? "negative-balance" : "positive-balance"}>
-          £{currentBalance.toFixed(2)}
-        </p>
+    <div>
+      <div className="title-container">
+        <h1>Budget Forecasting</h1>
+        <h3>Plan your finances based on past spending.</h3>
       </div>
-
-      {warningMessage && <p className="warning-message">{warningMessage}</p>}
-
-      <div className="info-box">
-        <h3>Projected Balance</h3>
-        <p><strong>In 1 Week:</strong> £{forecast1Week.toFixed(2)}</p>
-        <p><strong>In 1 Month:</strong> £{forecast1Month.toFixed(2)}</p>
-      </div>
-
-      <div className="forecast-details">
-        <p><strong>Daily Spending Rate:</strong> £{avgDailySpending.toFixed(2)}</p>
-        <p>Keep track of your expenses to stay within budget.</p>
+      <div className="budget-forecasting">
+        <div className="info-box">
+          <h3>Current Balance</h3>
+          <p className={currentBalance < 0 ? "negative-balance" : "positive-balance"}>
+            £{currentBalance.toFixed(2)}
+          </p>
+        </div>
+  
+        {warningMessage && <p className="warning-message">{warningMessage}</p>}
+  
+        <div className="info-box">
+          <h3>Projected Balance</h3>
+          <p><strong>In 1 Week:</strong> £{forecast1Week.toFixed(2)}</p>
+          <p><strong>In 1 Month:</strong> £{forecast1Month.toFixed(2)}</p>
+        </div>
+  
+        <div className="forecast-details">
+          <p><strong>Daily Spending Rate:</strong> £{avgDailySpending.toFixed(2)}</p>
+          <p>Keep track of your expenses to stay within budget.</p>
+        </div>
       </div>
     </div>
   );
