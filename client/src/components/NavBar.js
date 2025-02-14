@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/main.css";
 import DarkModeToggle from './DarkModeToggle'; // Import Dark Mode Toggle
+import LoginForm from './LoginForm';
 
 const NavBar = () => {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);

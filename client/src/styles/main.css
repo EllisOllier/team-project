@@ -211,7 +211,21 @@
   border-radius: 20px;
 }
 
-#
+#username, #password {
+  border-radius: 20px;
+  border: 1px solid black;
+  padding: 5px;
+  margin: 5px;
+}
+
+#login-button {
+  margin: 5px;
+}
+
+#login-title {
+  margin-bottom: 10px;
+}
+
 
 .main-content {
   display: flex;

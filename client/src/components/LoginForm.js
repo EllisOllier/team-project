@@ -40,23 +40,25 @@ const LoginForm = () => {
 
   return (
     <form className="login-form" onSubmit={checkLogin}>
-      <h2>Login</h2>
-      <label htmlFor="username">Username</label>
+      <h2 id="login-title">Login</h2>
+      <label htmlFor="username"></label>
       <input
         type="text"
         id="username"
         name="username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
         required
       />
-      <label htmlFor="password">Password</label>
+      <label htmlFor="password"></label>
       <input
         type="password"
         id="password"
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
         required
       />
       <button id="login-button" type="submit">Login</button>
