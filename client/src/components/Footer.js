@@ -2,6 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/main.css";
+import ApiAliveStatus from './ApiAliveStatus';
+import '../components/ApiAliveStatus.css';
 
 const Footer = () => {
   return (
@@ -13,6 +15,7 @@ const Footer = () => {
         <li className="footer-item"><Link to="/services">Services</Link></li>
         <li className="footer-item"><Link to="/contact">Contact</Link></li>
       </ul>
+      <ApiAliveStatus />
     </footer>
     // Add html above
   );
