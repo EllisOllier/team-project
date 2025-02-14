@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // import controllers
-const {getApiCheck} = require('../controllers/api-check')
+const { getApiCheck } = require('../controllers/api-check')
 
 // import middlewares
 

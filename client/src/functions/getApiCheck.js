@@ -1,6 +1,6 @@
 export const getApiCheck = async () => {
     try {
-        const res = await fetch('http://localhost:8080/api-check', {
+        const res = await fetch('http://localhost:8080/api/status-check/api-check', {
             method: 'GET',
             headers: {
                 Accept: 'application/json',
