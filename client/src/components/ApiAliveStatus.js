@@ -21,7 +21,7 @@ const ApiAliveStatus = () => {
 
     return (
       // Add html below
-        <p>Api status check: {data}</p>
+        <p>Server status: {data}</p>
       // Add html above
     )
 }
