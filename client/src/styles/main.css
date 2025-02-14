@@ -238,6 +238,23 @@
   margin-bottom: 10px;
 }
 
+.progress-bar-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  height: 20px;
+  background-color: #4caf50;
+  text-align: center;
+  line-height: 20px;
+  color: white;
+  border-radius: 5px;
+}
+
 .main-content {
   display: flex;
   flex-direction: column;
@@ -349,4 +366,80 @@ body {
 
 .dark-mode #login-button:hover {
   background-color: #666 !important;
+}
+
+/* Budget Forecasting Styles */
+.budget-forecasting {
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-color);  /* Ensure background is dynamic */
+  color: var(--text-color);  /* Ensure text color updates */
+}
+
+.info-box {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--box-bg);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.positive-balance {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.negative-balance {
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+}
+
+.warning-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.forecast-details {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Light Mode (Default) */
+:root {
+  --bg-color: white;
+  --text-color: black;
+  --text-secondary: #666;
+  --border-color: #ddd;
+  --box-bg: #f9f9f9;
+}
+
+/* Dark Mode */
+.dark-mode {
+  --bg-color: #1e1e1e;
+  --text-color: white;
+  --text-secondary: #bbb;
+  --border-color: #444;
+  --box-bg: #2a2a2a;
+}
+
+.dark-mode .negative-balance {
+  color: #ff6666;
+}
+
+.dark-mode .warning-message {
+  color: #ff4c4c;
+}
+
+.dark-mode .budget-forecasting {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
 }
