@@ -11,9 +11,10 @@ const Footer = () => {
     <footer className="footer">
       <ul className="footer-list">
         <li className="footer-item"><Link to="/">Home</Link></li>
-        <li className="footer-item"><Link to="/about">About</Link></li>
-        <li className="footer-item"><Link to="/services">Services</Link></li>
-        <li className="footer-item"><Link to="/contact">Contact</Link></li>
+        <li className="footer-item"><Link to="/dashboard">Dashboard</Link></li>
+        <li className="footer-item"><Link to="/currency-converter">Currency Converter</Link></li>
+        <li className="footer-item"><Link to="/expense-tracker">Expense Tracker</Link></li>
+        <li className="footer-item"><Link to="/budget-forecasting">Budget Forecasting</Link></li>
       </ul>
       <ApiAliveStatus />
     </footer>
