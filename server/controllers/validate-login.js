@@ -28,7 +28,7 @@ export const validateLogin = async (req, res) => {
 
     if (data && data.userPassword === password) {
       // Login successful
-      return res.status(200).json({ message: 'Login successful', userUsername: data.userUsername });
+      return res.status(200).json({ message: 'Login successful', userUsername: data.userUsername, userID: data.userID});
     } else {
       // Login failed
       return res.status(401).json({ error: 'Invalid username or password' });
