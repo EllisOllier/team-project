@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
 const ExpenseTracker = () => {
-  const [budget, setBudget] = useState(() => {
+  const [initialBudget, setInitialBudget] = useState(() => {
     const storedBudget = localStorage.getItem("budget");
-    return storedBudget ? parseFloat(storedBudget) : 0; // Fix: Prevent NaN issues
+    return storedBudget ? parseFloat(storedBudget) : 0;
   });
 
   const [expenses, setExpenses] = useState(() => {
@@ -21,8 +21,8 @@ const ExpenseTracker = () => {
   const categories = ["Food", "Travel", "Entertainment", "Shopping", "Bills", "Other"];
 
   useEffect(() => {
-    localStorage.setItem("budget", budget);
-  }, [budget]);
+    localStorage.setItem("budget", initialBudget);
+  }, [initialBudget]);
 
   useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(expenses));
@@ -34,7 +34,7 @@ const ExpenseTracker = () => {
       alert("Please enter a valid budget.");
       return;
     }
-    setBudget(userBudget);
+    setInitialBudget(userBudget);
   };
 
   const addExpense = () => {
@@ -44,33 +44,36 @@ const ExpenseTracker = () => {
     }
     const expenseAmount = parseFloat(amount);
 
-    if (expenseAmount > budget || budget === 0) {
+    if (expenseAmount > remainingBudget) {
       alert("Not enough funds!");
       return;
     }
 
     const newExpense = { id: Date.now(), amount: expenseAmount, category, date };
     setExpenses([...expenses, newExpense]);
-    setBudget((prevBudget) => prevBudget - expenseAmount);
 
     setAmount("");
-    setCategory(""); // Fix: Reset to placeholder text
+    setCategory("");
     setDate("");
   };
 
   const resetBudget = () => {
     if (window.confirm("Are you sure you want to reset your budget? This will clear all expenses.")) {
-      setBudget(0);
+      setInitialBudget(0);
       setExpenses([]);
       localStorage.removeItem("budget");
       localStorage.removeItem("expenses");
     }
   };
 
+  // Calculate total spent and correct remaining balance
+  const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0);
+  const remainingBudget = initialBudget - totalSpent; // Fix: Correct calculation
+
   const sortedExpenses = [...expenses].sort((a, b) => {
     if (sortBy === "amount") return b.amount - a.amount;
     if (sortBy === "category") return a.category.localeCompare(b.category);
-    return new Date(a.date) - new Date(b.date); // Fix: Consistent date parsing
+    return new Date(a.date) - new Date(b.date);
   });
 
   const filteredExpenses = filterByCategory
@@ -83,11 +86,11 @@ const ExpenseTracker = () => {
         <h1>Expense Tracker</h1>
       </div>
 
-      {budget === 0 ? (
+      {initialBudget === 0 ? (
         <button onClick={handleSetBudget}>Set Your Budget</button>
       ) : (
         <>
-          <h3>Remaining Budget: £{budget.toFixed(2)}</h3>
+          <h3>Remaining Budget: £{remainingBudget.toFixed(2)}</h3>
 
           <input
             type="number"
