@@ -8,6 +8,9 @@ const CurrencyConverter = () => {
   const [recentConversions, setRecentConversions] = useState([]);
   const [convertedAmount, setConvertedAmount] = useState(0);
 
+  const [calcInput, setCalcInput] = useState("");
+  const [calcResult, setCalcResult] = useState("");
+
   const currencies = [
     { code: "GBP", symbol: "£" },
     { code: "EUR", symbol: "€" },
@@ -67,14 +70,34 @@ const CurrencyConverter = () => {
     setRecentConversions((prevConversions) => [newConversion, ...prevConversions].slice(0, 5)); // Keep only last 5
   };
 
+  const handleCalcInput = (value) => {
+    setCalcInput((prev) => prev + value);
+  };
+
+  const clearCalculator = () => {
+    setCalcInput("");
+    setCalcResult("");
+  };
+
+  const calculateResult = () => {
+    try {
+      setCalcResult(eval(calcInput).toFixed(2)); // Evaluate the expression
+    } catch {
+      setCalcResult("Error");
+    }
+  };
+
   return (
     <div>
       <div className="title-container">
-        <h1>Currency Converter</h1>
-        <h3>From A to B with ease</h3>
+        <h1>Finance Tools</h1>
+        <h3>Convert currencies & calculate with ease</h3>
       </div>
-      <div className="main-content">
+
+      <div className="main-content two-column-layout">
+        {/* Currency Converter */}
         <div className="currency-converter-container">
+          <h2>Currency Converter</h2>
           <label htmlFor="amount-currency">
             Enter amount: <input id="amount-currency" type="number" />
           </label>
@@ -118,6 +141,33 @@ const CurrencyConverter = () => {
               </ul>
             </div>
           )}
+        </div>
+
+        {/* Calculator */}
+        <div className="currency-converter-container">
+          <h2>Basic Calculator</h2>
+          <div className="calculator-display">
+            <input type="text" value={calcInput} readOnly />
+            <p>Result: {calcResult}</p>
+          </div>
+          <div className="calculator-buttons">
+            <button onClick={() => handleCalcInput("1")}>1</button>
+            <button onClick={() => handleCalcInput("2")}>2</button>
+            <button onClick={() => handleCalcInput("3")}>3</button>
+            <button onClick={() => handleCalcInput("+")}>+</button>
+            <button onClick={() => handleCalcInput("4")}>4</button>
+            <button onClick={() => handleCalcInput("5")}>5</button>
+            <button onClick={() => handleCalcInput("6")}>6</button>
+            <button onClick={() => handleCalcInput("-")}>-</button>
+            <button onClick={() => handleCalcInput("7")}>7</button>
+            <button onClick={() => handleCalcInput("8")}>8</button>
+            <button onClick={() => handleCalcInput("9")}>9</button>
+            <button onClick={() => handleCalcInput("*")}>*</button>
+            <button onClick={clearCalculator}>C</button>
+            <button onClick={() => handleCalcInput("0")}>0</button>
+            <button onClick={calculateResult}>=</button>
+            <button onClick={() => handleCalcInput("/")}>/</button>
+          </div>
         </div>
       </div>
     </div>

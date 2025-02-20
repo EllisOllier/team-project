@@ -401,6 +401,18 @@
   }
 }
 
+.calculator-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.calculator-buttons button {
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
 /* Dark Mode */
 .dark-mode .dashboard-container {
   background: var(--bg-color);
