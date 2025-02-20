@@ -28,6 +28,8 @@ const LoginForm = () => {
         // Login successful
         setErrorMessage('');
         console.log('Login successful', result);
+        // Store userID to local storage
+        localStorage.setItem('userID', result.userID)
         // Redirect or perform further actions here
         navigate("/Dashboard");
       } else {
