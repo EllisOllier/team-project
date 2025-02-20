@@ -90,7 +90,7 @@ const CurrencyConverter = () => {
   return (
     <div>
       <div className="title-container">
-        <h1>Finance Tools</h1>
+        <h1>Currency Converter</h1>
         <h3>Convert currencies & calculate with ease</h3>
       </div>
 
@@ -145,7 +145,7 @@ const CurrencyConverter = () => {
 
         {/* Calculator */}
         <div className="currency-converter-container">
-          <h2>Basic Calculator</h2>
+          <h2>Calculator</h2>
           <div className="calculator-display">
             <input type="text" value={calcInput} readOnly />
             <p>Result: {calcResult}</p>
