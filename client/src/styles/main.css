@@ -336,6 +336,35 @@
   font-weight: bold;
 }
 
+/* Budget Status Colors */
+.positive-balance {
+  color: green;
+  font-weight: bold;
+}
+.warning-balance {
+  color: orange;
+  font-weight: bold;
+}
+.negative-balance {
+  color: red;
+  font-weight: bold;
+}
+
+/* Expense Category Badges */
+.expense-category {
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-right: 5px;
+  display: inline-block;
+}
+.expense-category.food { background-color: #ffcc80; }
+.expense-category.travel { background-color: #80cbc4; }
+.expense-category.entertainment { background-color: #b39ddb; }
+.expense-category.shopping { background-color: #ffab91; }
+.expense-category.bills { background-color: #81c784; }
+.expense-category.other { background-color: #e0e0e0; }
+
 /* Buttons */
 .dashboard-actions {
   margin-top: 15px;
