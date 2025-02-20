@@ -87,7 +87,7 @@ const ExpenseTracker = () => {
       </div>
 
       {initialBudget === 0 ? (
-        <button onClick={handleSetBudget}>Set Your Budget</button>
+        <button className="dashboard-button" onClick={handleSetBudget}>Set Your Budget</button>
       ) : (
         <>
           <h3>Remaining Budget: £{remainingBudget.toFixed(2)}</h3>
