@@ -294,6 +294,94 @@
   margin-left: 10px;
 }
 
+/* Dashboard Container */
+.dashboard-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Section */
+.dashboard-title {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--box-bg);
+  border-radius: 10px 10px 0 0;
+}
+
+/* Balance Info */
+.dashboard-info {
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 8px;
+  background: var(--box-bg);
+}
+
+.positive-balance {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.negative-balance {
+  color: red;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Buttons */
+.dashboard-actions {
+  margin-top: 15px;
+}
+
+.dashboard-button {
+  text-align: center;
+  padding: 0.5rem;
+  width: 40%;
+  max-width: 200px;
+  border-radius: 20px;
+  border: none;
+  color: whitesmoke;
+  background-color: #1fcc04;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.dashboard-button:hover {
+  background-color: #19a603;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .dashboard-button {
+    width: 80%;
+  }
+}
+
+/* Dark Mode */
+.dark-mode .dashboard-container {
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode .negative-balance {
+  color: #ff6666;
+}
+
 /* Light Mode (Default) */
 body {
   background-color: white;
