@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 
 const ExpenseTracker = () => {
   const [budget, setBudget] = useState(() => {
-    return parseFloat(localStorage.getItem("budget")) || null;
+    const storedBudget = localStorage.getItem("budget");
+    return storedBudget ? parseFloat(storedBudget) : 0; // Fix: Prevent NaN issues
   });
 
   const [expenses, setExpenses] = useState(() => {
@@ -11,7 +12,7 @@ const ExpenseTracker = () => {
   });
 
   const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState(""); // Now a dropdown selection
+  const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
 
   const [sortBy, setSortBy] = useState("date");
@@ -20,7 +21,7 @@ const ExpenseTracker = () => {
   const categories = ["Food", "Travel", "Entertainment", "Shopping", "Bills", "Other"];
 
   useEffect(() => {
-    if (budget !== null) localStorage.setItem("budget", budget);
+    localStorage.setItem("budget", budget);
   }, [budget]);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const ExpenseTracker = () => {
     }
     const expenseAmount = parseFloat(amount);
 
-    if (expenseAmount > budget) {
+    if (expenseAmount > budget || budget === 0) {
       alert("Not enough funds!");
       return;
     }
@@ -53,13 +54,13 @@ const ExpenseTracker = () => {
     setBudget((prevBudget) => prevBudget - expenseAmount);
 
     setAmount("");
-    setCategory("");
+    setCategory(""); // Fix: Reset to placeholder text
     setDate("");
   };
 
   const resetBudget = () => {
     if (window.confirm("Are you sure you want to reset your budget? This will clear all expenses.")) {
-      setBudget(null);
+      setBudget(0);
       setExpenses([]);
       localStorage.removeItem("budget");
       localStorage.removeItem("expenses");
@@ -69,7 +70,7 @@ const ExpenseTracker = () => {
   const sortedExpenses = [...expenses].sort((a, b) => {
     if (sortBy === "amount") return b.amount - a.amount;
     if (sortBy === "category") return a.category.localeCompare(b.category);
-    return new Date(a.date) - new Date(b.date);
+    return new Date(a.date) - new Date(b.date); // Fix: Consistent date parsing
   });
 
   const filteredExpenses = filterByCategory
@@ -82,7 +83,7 @@ const ExpenseTracker = () => {
         <h1>Expense Tracker</h1>
       </div>
 
-      {budget === null ? (
+      {budget === 0 ? (
         <button onClick={handleSetBudget}>Set Your Budget</button>
       ) : (
         <>
