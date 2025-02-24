@@ -6,12 +6,45 @@ const SignUp = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate(); // Create a navigation function
 
     const CheckSignUp = async (event) => {
         event.preventDefault();
         // Add api call
-        console.log(username + password);
+        try {
+            const response = await fetch('http://localhost:8080/api/check/create-account/', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+              });
+
+              const result = await response.json();
+              if (response.ok) {
+                // Login successful
+                setErrorMessage('');
+                console.log('Account created successfully!', result);
+                // Store userID to local storage
+                localStorage.setItem('userID', result.userID)
+                //update login status 
+                setIsLoggedIn(true);
+                // Redirect or perform further actions here
+                navigate("/Dashboard");
+              } else {
+                // Login failed
+                setErrorMessage(result.error || 'Username already exists');
+              }
+        }
+        catch (err) {
+            setErrorMessage('An unexpected error occurred');
+            console.error('Unexpected error:', err);
+        }
+    };
+
+    if (isLoggedIn) {
+        return null;
     }
 
     return (

@@ -33,14 +33,15 @@ export const createAccount = async (req, res) => {
         // Proceed with account creation
         const { data, error } = await supabase
             .from('user')
-            .insert([{ userUsername: username, userPassword: password }]);
+            .insert([{ userUsername: username, userPassword: password }])
+            .select('userID'); // Select the userID of the newly created user
 
         if (error) {
             console.error('Error creating account:', error);
             return res.status(500).json({ error: 'Error creating account' });
         }
 
-        return res.status(201).json({ message: 'Account created successfully' });
+        return res.status(201).json({ message: 'Account created successfully', userID: data[0].userID });
     } catch (err) {
         console.error('Unexpected error:', err);
         return res.status(500).json({ error: 'An unexpected error occurred' });
