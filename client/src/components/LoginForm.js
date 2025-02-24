@@ -8,6 +8,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate(); // Create a navigation function
 
   const checkLogin = async (event) => {
@@ -30,6 +31,8 @@ const LoginForm = () => {
         console.log('Login successful', result);
         // Store userID to local storage
         localStorage.setItem('userID', result.userID)
+        //update login status 
+        setIsLoggedIn(true);
         // Redirect or perform further actions here
         navigate("/Dashboard");
       } else {
@@ -41,6 +44,10 @@ const LoginForm = () => {
       console.error('Unexpected error:', err);
     }
   };
+
+  if (isLoggedIn) {
+    return null;
+  }
 
   return (
     <form className="login-form" onSubmit={checkLogin}>
