@@ -11,9 +11,15 @@ const ExpenseTracker = () => {
     return savedExpenses ? JSON.parse(savedExpenses) : [];
   });
 
+  const [recurringExpenses, setRecurringExpenses] = useState(() => {
+    const savedRecurringExpenses = localStorage.getItem("recurringExpenses");
+    return savedRecurringExpenses ? JSON.parse(savedRecurringExpenses) : [];
+  });
+
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
+  const [isRecurring, setIsRecurring] = useState(false);
 
   const [sortBy, setSortBy] = useState("date");
   const [filterByCategory, setFilterByCategory] = useState("");
@@ -27,6 +33,28 @@ const ExpenseTracker = () => {
   useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(expenses));
   }, [expenses]);
+
+  useEffect(() => {
+    localStorage.setItem("recurringExpenses", JSON.stringify(recurringExpenses));
+  }, [recurringExpenses]);
+
+  useEffect(() => {
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+    if (today.getDate()=== 1) {
+    const newExpenses = recurringExpenses.map(exp => {
+      const expenseDate = new Date(exp.date);
+      if (expenseDate.getMonth() !== currentMonth || expenseDate.getFullYear() !== currentYear) {
+        return { ...exp, date: `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(expenseDate.getDate()).padStart(2, '0')}` };
+      }
+      return exp;
+    });
+
+    setExpenses([...expenses, ...newExpenses]);
+    }
+}, [recurringExpenses]);
+
 
   const handleSetBudget = () => {
     const userBudget = parseFloat(prompt("Enter your budget:"));
@@ -53,9 +81,14 @@ const ExpenseTracker = () => {
     setExpenses([...expenses, newExpense]);
     setBudget((prevBudget) => prevBudget - expenseAmount);
 
+    if (isRecurring) {
+      setRecurringExpenses([...recurringExpenses, newExpense]);
+    }
+
     setAmount("");
     setCategory(""); // Fix: Reset to placeholder text
     setDate("");
+    setIsRecurring(false);
   };
 
   const resetBudget = () => {
@@ -64,6 +97,7 @@ const ExpenseTracker = () => {
       setExpenses([]);
       localStorage.removeItem("budget");
       localStorage.removeItem("expenses");
+      localStorage.removeItem("recurringExpenses");
     }
   };
 
@@ -106,6 +140,10 @@ const ExpenseTracker = () => {
           </select>
 
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <label>
+            <input type="checkbox" checked={isRecurring} onChange={(e) => setIsRecurring(e.target.checked)} />
+            Recurring
+          </label>
           <button className="signup-button" onClick={addExpense}>Add Expense</button>
 
           <h3>Sort & Filter</h3>
