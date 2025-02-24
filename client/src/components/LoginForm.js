@@ -5,10 +5,12 @@ import "../styles/main.css";
 
 
 const LoginForm = () => {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showForm, setShowForm] = useState(true);
   const navigate = useNavigate(); // Create a navigation function
 
   const checkLogin = async (event) => {
@@ -45,13 +47,22 @@ const LoginForm = () => {
     }
   };
 
-  if (isLoggedIn) {
+  if (isLoggedIn || !showForm) {
     return null;
   }
+  
 
   return (
     <form className="login-form" onSubmit={checkLogin}>
       <h2 id="login-title">Login</h2>
+      <button
+        id="exit-button"
+        type="button"
+        onClick={() => setShowForm(false)}
+        style={{ position: 'absolute', top: '10px', right: '10px', background: 'none', border: 'none', fontSize: '20px', cursor: 'pointer' }}
+      >
+        &times;
+      </button>
       <label htmlFor="username"></label>
       <input
         type="text"
