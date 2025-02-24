@@ -1,16 +1,22 @@
 // Import neccessary files
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import ApiAliveStatus from '../components/ApiAliveStatus';
 import "../styles/main.css";
 
 const Home = () => {
+  const navigate = useNavigate(); // Create a navigation function
+  const NavigateToSignUp = () => {
+    navigate("/sign-up");
+  }
+
   return (
     // Add html below
     <div>
       <div className="title-container">
         <h1>Finance Tracker for Students</h1>
         <h2>Budgeting made easy</h2>
-        <button className='signup-button'>Create a new account</button>
+        <button className='signup-button' onClick={NavigateToSignUp} >Create a new account</button>
       </div>
       <div className='feature-showcase'>
         <h2>Features</h2>
