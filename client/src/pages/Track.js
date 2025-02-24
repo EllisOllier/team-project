@@ -21,7 +21,7 @@ const ExpenseTracker = () => {
 
           const result = await response.json();
           if (response.ok) {
-            // Login successful
+            // Added expense successfully
             setErrorMessage('');
             console.log('Successfully added expense!', result);
             // Store expense to local storage
@@ -36,7 +36,6 @@ const ExpenseTracker = () => {
         console.error('Unexpected error:', err);
     }
   }
-
 
   const [initialBudget, setInitialBudget] = useState(() => {
     const storedBudget = localStorage.getItem("budget");
