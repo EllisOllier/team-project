@@ -1,6 +1,43 @@
 import { useState, useEffect } from "react";
 
 const ExpenseTracker = () => {
+  const [userID, setUserID] = useState(localStorage.getItem('userID'));
+  const [spendAmount, setSpendAmount] = useState('');
+  const [spendCategory, setSpendCategory] = useState('');
+  const [spendDate, setSpendDate] = useState('');
+  const [isRecurring, setIsRecurring] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const addExpense = async (event) => {
+    event.preventDefault();
+    try {
+        const response = await fetch('http://localhost:8080/api/expenses/add/add-expense', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userID, spendAmount, spendCategory, spendDate, isRecurring }),
+          });
+
+          const result = await response.json();
+          if (response.ok) {
+            // Login successful
+            setErrorMessage('');
+            console.log('Successfully added expense!', result);
+            // Store expense to local storage
+            //localStorage.setItem('userID', result.userID)
+          } else {
+            // Add expense failed
+            setErrorMessage(result.error || 'Failed to add expense');
+          }
+    }
+    catch (err) {
+        setErrorMessage('An unexpected error occurred');
+        console.error('Unexpected error:', err);
+    }
+  }
+
+
   const [initialBudget, setInitialBudget] = useState(() => {
     const storedBudget = localStorage.getItem("budget");
     return storedBudget ? parseFloat(storedBudget) : 0;
@@ -15,11 +52,6 @@ const ExpenseTracker = () => {
     const savedRecurringExpenses = localStorage.getItem("recurringExpenses");
     return savedRecurringExpenses ? JSON.parse(savedRecurringExpenses) : [];
   });
-
-  const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("");
-  const [date, setDate] = useState("");
-  const [isRecurring, setIsRecurring] = useState(false);
 
   const [sortBy, setSortBy] = useState("date");
   const [filterByCategory, setFilterByCategory] = useState("");
@@ -65,31 +97,6 @@ const ExpenseTracker = () => {
     setInitialBudget(userBudget);
   };
 
-  const addExpense = () => {
-    if (!amount || !category || !date) {
-      alert("Please fill all fields.");
-      return;
-    }
-    const expenseAmount = parseFloat(amount);
-
-    if (expenseAmount > remainingBudget) {
-      alert("Not enough funds!");
-      return;
-    }
-
-    const newExpense = { id: Date.now(), amount: expenseAmount, category, date };
-    setExpenses([...expenses, newExpense]);
-
-    if (isRecurring) {
-      setRecurringExpenses([...recurringExpenses, newExpense]);
-    }
-
-    setAmount("");
-    setCategory("");
-    setDate("");
-    setIsRecurring(false);
-  };
-
   const resetBudget = () => {
     if (window.confirm("Are you sure you want to reset your budget? This will clear all expenses.")) {
       setInitialBudget(0);
@@ -129,11 +136,11 @@ const ExpenseTracker = () => {
           <input
             type="number"
             placeholder="Expense Amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            value={spendAmount}
+            onChange={(e) => setSpendAmount(e.target.value)}
           />
 
-          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <select value={spendCategory} onChange={(e) => setSpendCategory(e.target.value)}>
             <option value="">Select Category</option>
             {categories.map((cat) => (
               <option key={cat} value={cat}>
@@ -142,7 +149,7 @@ const ExpenseTracker = () => {
             ))}
           </select>
 
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <input type="date" value={spendDate} onChange={(e) => setSpendDate(e.target.value)} />
           <label>
             <input type="checkbox" checked={isRecurring} onChange={(e) => setIsRecurring(e.target.checked)} />
             Recurring

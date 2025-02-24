@@ -5,17 +5,17 @@ const supabaseKey = process.env.SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const addExpense = async (req, res) => {
-    const { userID, spendAmount, spendCategory, spendDate } = req.body;
+    const { userID, spendAmount, spendCategory, spendDate, isRecurring} = req.body;
     console.log("Request Body:", req.body);
 
-    if (!userID || !spendAmount || !spendCategory || !spendDate) {
+    if (!userID || !spendAmount || !spendCategory || !spendDate || !isRecurring) {
         return res.status(400).json({ error: 'Please enter all required data!' });
     }
 
     try {
         const { data, error } = await supabase
             .from('userSpendData')
-            .insert([{ userID: userID, spendAmount: spendAmount, spendCategory: spendCategory, spendDate: spendDate }]);
+            .insert([{ userID: userID, spendAmount: spendAmount, spendCategory: spendCategory, spendDate: spendDate, isRecurring: isRecurring }]);
         
             if (error) {
                 console.error('Error adding expense:', error);
