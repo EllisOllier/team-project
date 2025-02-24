@@ -14,13 +14,16 @@ app.use(express.json()); // Add this line to parse JSON request bodies
 
 // routes
 const validateLogin = require("./routes/validate-login");
-app.use("/api/user/", validateLogin);
+app.use("/api/user", validateLogin);
 
 const createAccount = require("./routes/create-account");
 app.use("/api/check", createAccount);
 
 const checkApi = require("./routes/api-check");
 app.use("/api/status-check", checkApi);
+
+const addExpense = require("./routes/add-expense");
+app.use("/api/expenses/add", addExpense);
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json()); // Middleware to parse JSON request bodies
