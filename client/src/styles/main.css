@@ -238,6 +238,32 @@
   margin-bottom: 10px;
 }
 
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  padding: 10vh;
+}
+
+.signup-form > input {
+
+}
+
+.signup-form > button {
+  border-radius: 20px;
+  background-color: #1fcc04;
+  border: none;
+  color: whitesmoke;
+  padding: 1vw;
+
+}
+
+.signup-item {
+  width: 50vw;
+}
+
 .progress-bar-container {
   width: 100%;
   background-color: #e0e0e0;

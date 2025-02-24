@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import CurrencyConverter from './pages/CurrencyConverter';
 import ExpenseTracker from './pages/Track';
 import BudgetForecasting from './pages/BudgetForecasting';
+import SignUp from './pages/SignUp';
 
 // Components
 import LoginForm from './components/LoginForm';
@@ -19,13 +20,13 @@ function App() {
     // Add html below
     <Router>
       <NavBar />
-      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/currency-converter" element={<CurrencyConverter />} />
         <Route path="/expense-tracker" element={<ExpenseTracker />} />
         <Route path="/budget-forecasting" element={<BudgetForecasting />} />
+        <Route path="/sign-up" element={<SignUp />}></Route>
       </Routes>
       <Footer />
     </Router>
