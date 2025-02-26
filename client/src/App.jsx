@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import CurrencyConverter from './pages/CurrencyConverter';
-import ExpenseTracker from './pages/Track';
+import ExpenseTracker from './pages/ExpenseTracker';
 import BudgetForecasting from './pages/BudgetForecasting';
 import SignUp from './pages/SignUp';
 

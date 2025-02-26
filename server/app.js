@@ -25,9 +25,6 @@ app.use("/api/status-check", checkApi);
 const addExpense = require("./routes/add-expense");
 app.use("/api/expenses/add", addExpense);
 
-const myApi = require();
-app.use("/api/expenses/get/", myApi);
-
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json()); // Middleware to parse JSON request bodies
 
