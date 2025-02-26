@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Freecurrencyapi from "@everapi/freecurrencyapi-js";
 import "../styles/main.css";
 
@@ -86,6 +86,27 @@ const CurrencyConverter = () => {
       setCalcResult("Error");
     }
   };
+
+  // Keyboard support for the calculator
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      const { key } = event;
+  
+      if (/[0-9+\-*/.]/.test(key)) {
+        setCalcInput((prev) => prev + key);
+      } else if (key === "=") {
+        event.preventDefault(); // Prevent default behavior
+        calculateResult();
+      } else if (key === "Backspace") {
+        setCalcInput((prev) => prev.slice(0, -1));
+      } else if (key === "Escape") {
+        clearCalculator();
+      }
+    };
+  
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, []);
 
   return (
     <div>
