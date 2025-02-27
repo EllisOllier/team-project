@@ -34,6 +34,9 @@ app.use("/api/expenses/budget/get", getBudget);
 const resetBudget = require("./routes/reset-budget");
 app.use("/api/expenses/budget/reset", resetBudget);
 
+const getExpenses = require("./routes/get-expenses");
+app.use("/api/expenses/get", getExpenses);
+
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json()); // Middleware to parse JSON request bodies
 
