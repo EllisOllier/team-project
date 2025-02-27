@@ -3,6 +3,7 @@ import Freecurrencyapi from "@everapi/freecurrencyapi-js";
 import "../styles/main.css";
 
 const CurrencyConverter = () => {
+  // Api key
   const currencyApi = new Freecurrencyapi("fca_live_7IzkWSy6LsA5XsnsG6t7ldzmhfHHJGG3om5pODDr");
 
   const [recentConversions, setRecentConversions] = useState([]);
