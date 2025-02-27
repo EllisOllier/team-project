@@ -28,6 +28,9 @@ app.use("/api/expenses/add", addExpense);
 const setBudget = require("./routes/set-budget");
 app.use("/api/expenses/budget/set", setBudget);
 
+const getBudget = require("./routes/get-budget");
+app.use("/api/expenses/budget/get", getBudget);
+
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json()); // Middleware to parse JSON request bodies
 
