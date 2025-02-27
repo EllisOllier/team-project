@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { getBudget } = require("../controllers/get-budget");
+const { validateLogin } = require("../../controllers/account/validate-login");
 
-router.get('/get-budget', getBudget);
+router.post('/validate-login', validateLogin);
 router.use((req, res) => {
     res.status(404).json({ error: 'Not Found' });
 });

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // import controllers
-const { addExpense } = require('../controllers/add-expense');
+const { addExpense } = require('../../controllers/expense/add-expense');
 
 // api routes
 router.post('/add-expense', addExpense);

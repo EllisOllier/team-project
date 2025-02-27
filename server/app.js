@@ -13,28 +13,28 @@ app.use(cors({origin : true, credentials : true}));
 app.use(express.json()); // Add this line to parse JSON request bodies
 
 // routes
-const validateLogin = require("./routes/validate-login");
+const validateLogin = require("./routes/account/validate-login");
 app.use("/api/user", validateLogin);
 
-const createAccount = require("./routes/create-account");
+const createAccount = require("./routes/account/create-account");
 app.use("/api/check", createAccount);
 
 const checkApi = require("./routes/api-check");
 app.use("/api/status-check", checkApi);
 
-const addExpense = require("./routes/add-expense");
+const addExpense = require("./routes/expense/add-expense");
 app.use("/api/expenses/add", addExpense);
 
-const setBudget = require("./routes/set-budget");
+const setBudget = require("./routes/expense/budget/set-budget");
 app.use("/api/expenses/budget/set", setBudget);
 
-const getBudget = require("./routes/get-budget");
+const getBudget = require("./routes/expense/budget/get-budget");
 app.use("/api/expenses/budget/get", getBudget);
 
-const resetBudget = require("./routes/reset-budget");
+const resetBudget = require("./routes/expense/budget/reset-budget");
 app.use("/api/expenses/budget/reset", resetBudget);
 
-const getExpenses = require("./routes/get-expenses");
+const getExpenses = require("./routes/expense/get-expenses");
 app.use("/api/expenses/get", getExpenses);
 
 app.use(cors({ origin: true, credentials: true }));

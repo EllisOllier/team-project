@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // import controllers
-const { setBudget } = require('../controllers/set-budget');
+const { setBudget } = require('../../../controllers/expense/budget/set-budget');
 
 
 // api routes

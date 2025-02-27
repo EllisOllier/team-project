@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { getExpenses } = require("../controllers/get-expenses");
+const { getBudget } = require("../../../controllers/expense/budget/get-budget");
 
-router.get('/get-expenses', getExpenses);
+router.get('/get-budget', getBudget);
 router.use((req, res) => {
     res.status(404).json({ error: 'Not Found' });
 });
