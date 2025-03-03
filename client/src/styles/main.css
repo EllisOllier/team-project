@@ -8,8 +8,8 @@
 
 .button {
   text-align: center;
-  margin-top: 1rem;
-  padding: 0.5rem;
+  margin-top: 1.5vh;
+  padding: 1vh;
   width: 100vw;
   max-width: 150px;
   border-radius: 20px;
@@ -74,7 +74,7 @@
   border: none;
   background-color: red;
   color: whitesmoke;
-  padding: 1.5vw;
+  padding: 1.5vh;
   margin-bottom: 3vh;
 }
 
@@ -236,12 +236,14 @@ html, body {
 }
 
 .signup-button:hover,
-#login-button:hover {
+#login-button:hover,
+.button:hover {
   background-color: #19a603;
 }
 
 .signup-button:active,
-#login-button:active {
+#login-button:active,
+.button:active {
   background-color: #0d4d00;
 }
 
