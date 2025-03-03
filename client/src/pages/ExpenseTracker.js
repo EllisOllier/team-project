@@ -10,7 +10,7 @@ const ExpenseTracker = () => {
   const [expenses, setExpenses] = useState([]);
 
   // User variables
-  const [userBudget, setUserBudget] = useState();
+  const [userBudget, setUserBudget] = useState(0);
 
   // Error variable
   const [errorMessage, setErrorMessage] = useState();
@@ -21,6 +21,7 @@ const ExpenseTracker = () => {
   // UseEffect functions
   useEffect(() => {
     getExpenses();
+    getBudget();
   }, []);
 
   const addExpense = async (event) => {
@@ -38,9 +39,9 @@ const ExpenseTracker = () => {
       if (response.ok) {
         // Added expense successfully
         setErrorMessage('');
-        console.log('Successfully added expense!', result);
         // Update the expenses state
         setExpenses([...expenses, result.expense]);
+        getExpenses();
       } else {
         // Add expense failed
         setErrorMessage(result.error || 'Failed to add expense');
@@ -65,11 +66,8 @@ const ExpenseTracker = () => {
       if (response.ok) {
         // Fetched expenses successfully
         setErrorMessage('');
-        console.log('Successfully fetched expenses!', result);
-
         // Update the expenses state
         setExpenses(result.expenses);
-        console.log("Logging expenses var: ", result.expenses);
       } else {
         // Fetch expenses failed
         setErrorMessage(result.error || 'Failed to get expenses');
@@ -92,7 +90,7 @@ const ExpenseTracker = () => {
 
       const result = await response.json();
       if (response.ok) {
-        console.log('Successfully set budget!', result);
+        // Enter any code
       } else {
         setErrorMessage(result.error || 'Failed to set budget');
       }
@@ -101,6 +99,29 @@ const ExpenseTracker = () => {
       console.error('Unexpected error:', err);
     }
   };
+
+  const getBudget = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/expenses/budget/get/get-budget', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID: userID }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setUserBudget(result.userBudget);
+      } else {
+        setErrorMessage(result.error || 'Failed to fetch budget');
+      }
+
+    } catch (err) {
+      setErrorMessage('An unexpected error occurred');
+      console.error('Unexpected error:', err);
+    }
+  }
 
   const handleSetBudget = () => {
     const inputBudget = parseFloat(prompt("Enter your budget:"));
@@ -112,19 +133,32 @@ const ExpenseTracker = () => {
     setBudget(inputBudget); // Pass inputBudget directly to setBudget
   };
 
-  const resetBudget = () => {
-    if (window.confirm("Are you sure you want to reset your budget? This will clear all expenses.")) {
-      setUserBudget(0);
-      setExpenses([]);
-      localStorage.removeItem("userBudget");
-      localStorage.removeItem("expenses");
-      localStorage.removeItem("recurringExpenses");
+  const resetBudget = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/expenses/reset/reset-budget-expense', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID: userID }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        handleSetBudget();
+      } else {
+        setErrorMessage(result.error || 'Failed to fetch budget');
+      }
+
+    } catch (err) {
+      setErrorMessage('An unexpected error occurred');
+      console.error('Unexpected error:', err);
     }
   };
 
   // Calculate total spent and correct remaining balance
-  const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense.spendAmount), 0);
-  const remainingBudget = userBudget - totalSpent; // Fix: Correct calculation
+  const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense?.spendAmount || 0), 0);
+  const remainingBudget = userBudget - totalSpent;
 
   return (
     <div>
@@ -170,9 +204,11 @@ const ExpenseTracker = () => {
           <ul>
             {expenses.length > 0 ? (
               expenses.map((expense) => (
-                <li key={expense.id}>
-                  {expense.spendDate} - {expense.spendCategory}: £{expense.spendAmount}
-                </li>
+                expense && (
+                  <li key={expense.id}>
+                    {expense.spendDate} - {expense.spendCategory}: £{expense.spendAmount}
+                  </li>
+                )
               ))
             ) : (
               <p>No expenses found</p>

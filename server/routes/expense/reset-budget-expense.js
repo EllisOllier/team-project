@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { getBudget } = require("../../../controllers/expense/budget/get-budget");
+const { resetBudgetExpenses } = require("../../controllers/expense/reset-budget-expense");
 
-router.post('/get-budget', getBudget);
+router.post('/reset-budget-expense', resetBudgetExpenses);
 router.use((req, res) => {
     res.status(404).json({ error: 'Not Found' });
 });
