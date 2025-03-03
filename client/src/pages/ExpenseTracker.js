@@ -167,13 +167,14 @@ const ExpenseTracker = () => {
       <div className="title-container">
         <h1>Expense Tracker</h1>
       </div>
-
+      <div className="expense-tracker-container">
       {userBudget === 0 ? (
-        <button className="dashboard-button" onClick={handleSetBudget}>Set Your Budget</button>
+        <button className="button" id="set-budget-button" onClick={handleSetBudget}>Set Your Budget</button>
       ) : (
         <>
           <h3>Remaining Budget: £{remainingBudget.toFixed(2)}</h3>
-
+        <div className="add-expense-container">
+          <div className="expense-form">
           <input
             type="number"
             placeholder="Expense Amount"
@@ -195,14 +196,20 @@ const ExpenseTracker = () => {
             <input type="checkbox" checked={isRecurring} onChange={(e) => setIsRecurring(e.target.checked)} />
             Recurring
           </label>
-          <button className="signup-button" onClick={addExpense}>Add Expense</button>
-
-          <h3>Sort & Filter</h3>
+          </div>
+          <div className="add-expense-button-container">
+            <button className="button" onClick={addExpense}>Add Expense</button>
+          </div>
+        </div>
+        <div className="tracker-cont">
+        <div className="sort-filter-container">
+        <h3>Sort & Filter</h3>
           <div>
             
           </div>
-
-          <h3>Expense List</h3>
+        </div>
+        <div className="expense-list-container">
+        <h3>Expense List</h3>
           <ul>
             {expenses.length > 0 ? (
               expenses.map((expense) => (
@@ -216,12 +223,14 @@ const ExpenseTracker = () => {
               <p>No expenses found</p>
             )}
           </ul>
-
-          <button onClick={resetBudget} style={{ backgroundColor: "red", color: "white", marginTop: "10px" }}>
+        </div>
+        </div>
+          <button onClick={resetBudget} id="reset-button">
             Reset Budget
           </button>
         </>
       )}
+      </div>
     </div>
   );
 };

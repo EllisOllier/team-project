@@ -6,6 +6,86 @@
   font-family: "Roboto", sans-serif;
 }
 
+.button {
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  width: 100vw;
+  max-width: 150px;
+  border-radius: 20px;
+  border: none;
+  color: whitesmoke;
+  background-color: #1fcc04;
+}
+
+#set-budget-button {
+  margin: 5vh;
+}
+
+.expense-tracker-container {
+  display: flex;
+  padding-top: 3vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3vh;
+}
+
+.tracker-cont {
+  display: flex;
+  gap: 5vw;
+}
+
+.expense-list-container, .sort-filter-container {
+  padding: 5vh;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0px 0px black;
+}
+
+.expense-list-container > ul{
+  list-style-type: none;
+  padding: 2vw 2vw 2vw 0vw;
+}
+
+.add-expense-container {
+  padding: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+
+  border: 1px solid black;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0px 0px black;
+}
+
+.expense-form {
+  display: flex;
+  flex-direction: row;
+}
+
+.add-expense-button-container {
+  display: flex;
+}
+
+#reset-button {
+  border-radius: 20px;
+  border: none;
+  background-color: red;
+  color: whitesmoke;
+  padding: 1.5vw;
+  margin-bottom: 3vh;
+}
+
+#reset-button:hover {
+  background-color: darkred;
+}
+
+#reset-button:active {
+  background-color: maroon;
+}
+
 /* NavBar and Footer Styles */
 .navbar, .footer {
   background-color: #333;
