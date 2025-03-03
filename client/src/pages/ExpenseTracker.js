@@ -1,61 +1,30 @@
 import { useState, useEffect } from "react";
 
 const ExpenseTracker = () => {
+  // Expense data variables
   const [userID, setUserID] = useState(localStorage.getItem('userID'));
   const [spendAmount, setSpendAmount] = useState('');
   const [spendCategory, setSpendCategory] = useState('');
   const [spendDate, setSpendDate] = useState('');
   const [isRecurring, setIsRecurring] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [userBudget, setUserBudget] = useState(() => {
-    const storedBudget = localStorage.getItem("userBudget");
-    return storedBudget ? parseFloat(storedBudget) : 0;
-  });
-  const [expenses, setExpenses] = useState(() => {
-    const savedExpenses = localStorage.getItem("expenses");
-    return savedExpenses ? JSON.parse(savedExpenses) : [];
-  });
-  const [recurringExpenses, setRecurringExpenses] = useState(() => {
-    const savedRecurringExpenses = localStorage.getItem("recurringExpenses");
-    return savedRecurringExpenses ? JSON.parse(savedRecurringExpenses) : [];
-  });
-  const [sortBy, setSortBy] = useState("date");
-  const [filterByCategory, setFilterByCategory] = useState("");
+  const [expenses, setExpenses] = useState([]);
 
+  // User variables
+  const [userBudget, setUserBudget] = useState();
+
+  // Error variable
+  const [errorMessage, setErrorMessage] = useState();
+
+  // Page variables
   const categories = ["Food", "Travel", "Entertainment", "Shopping", "Bills", "Other"];
 
+  // UseEffect functions
   useEffect(() => {
-    localStorage.setItem("userBudget", userBudget);
-  }, [userBudget]);
-
-  useEffect(() => {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
-
-  useEffect(() => {
-    localStorage.setItem("recurringExpenses", JSON.stringify(recurringExpenses));
-  }, [recurringExpenses]);
-
-  useEffect(() => {
-    const today = new Date();
-    const currentMonth = today.getMonth();
-    const currentYear = today.getFullYear();
-    if (today.getDate() === 1) {
-      const newExpenses = recurringExpenses.map(exp => {
-        const expenseDate = new Date(exp.date);
-        if (expenseDate.getMonth() !== currentMonth || expenseDate.getFullYear() !== currentYear) {
-          return { ...exp, date: `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(expenseDate.getDate()).padStart(2, '0')}` };
-        }
-        return exp;
-      });
-
-      setExpenses([...expenses, ...newExpenses]);
-    }
-  }, [recurringExpenses]);
+    getExpenses();
+  }, []);
 
   const addExpense = async (event) => {
     event.preventDefault();
-    console.log(`${userID}, ${spendAmount}, ${spendCategory}, ${spendDate}, ${isRecurring}`);
     try {
       const response = await fetch('http://localhost:8080/api/expenses/add/add-expense', {
         method: 'POST',
@@ -70,9 +39,40 @@ const ExpenseTracker = () => {
         // Added expense successfully
         setErrorMessage('');
         console.log('Successfully added expense!', result);
+        // Update the expenses state
+        setExpenses([...expenses, result.expense]);
       } else {
         // Add expense failed
         setErrorMessage(result.error || 'Failed to add expense');
+      }
+    } catch (err) {
+      setErrorMessage('An unexpected error occurred');
+      console.error('Unexpected error:', err);
+    }
+  };
+
+  const getExpenses = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/expenses/get/get-expenses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        // Fetched expenses successfully
+        setErrorMessage('');
+        console.log('Successfully fetched expenses!', result);
+
+        // Update the expenses state
+        setExpenses(result.expenses);
+        console.log("Logging expenses var: ", result.expenses);
+      } else {
+        // Fetch expenses failed
+        setErrorMessage(result.error || 'Failed to get expenses');
       }
     } catch (err) {
       setErrorMessage('An unexpected error occurred');
@@ -123,18 +123,8 @@ const ExpenseTracker = () => {
   };
 
   // Calculate total spent and correct remaining balance
-  const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0);
+  const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense.spendAmount), 0);
   const remainingBudget = userBudget - totalSpent; // Fix: Correct calculation
-
-  const sortedExpenses = [...expenses].sort((a, b) => {
-    if (sortBy === "amount") return b.amount - a.amount;
-    if (sortBy === "category") return a.category.localeCompare(b.category);
-    return new Date(a.date) - new Date(b.date);
-  });
-
-  const filteredExpenses = filterByCategory
-    ? sortedExpenses.filter(exp => exp.category === filterByCategory)
-    : sortedExpenses;
 
   return (
     <div>
@@ -173,34 +163,19 @@ const ExpenseTracker = () => {
 
           <h3>Sort & Filter</h3>
           <div>
-            <label>Sort By: </label>
-            <select onChange={(e) => setSortBy(e.target.value)}>
-              <option value="date">Date</option>
-              <option value="amount">Amount</option>
-              <option value="category">Category</option>
-            </select>
-
-            <label> Filter by Category: </label>
-            <select onChange={(e) => setFilterByCategory(e.target.value)}>
-              <option value="">All</option>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
+            
           </div>
 
           <h3>Expense List</h3>
           <ul>
-            {filteredExpenses.length > 0 ? (
-              filteredExpenses.map((exp) => (
-                <li key={exp.id}>
-                  {exp.date} - {exp.category}: £{exp.amount}
+            {expenses.length > 0 ? (
+              expenses.map((expense) => (
+                <li key={expense.id}>
+                  {expense.spendDate} - {expense.spendCategory}: £{expense.spendAmount}
                 </li>
               ))
             ) : (
-              <p>No expenses match the criteria.</p>
+              <p>No expenses found</p>
             )}
           </ul>
 
