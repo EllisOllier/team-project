@@ -18,6 +18,11 @@ const NavBar = () => {
     setIsLoginFormVisible(!isLoginFormVisible);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('userID');
+    setIsLoggedIn(false);
+  }
+
   return (
     <nav className="navbar">
       <ul className="navbar-list">
@@ -34,6 +39,14 @@ const NavBar = () => {
         )}
 
         <li className="navbar-item"><DarkModeToggle /></li>
+
+        {isLoggedIn && (
+          <li className="navbar-item">
+            <button onClick={handleLogout} style= {{ background: 'none', border: 'none', cursor: 'pointer' }}>
+              <i className="fas fa-sign-out-alt logout-icon"></i> Logout
+            </button>
+          </li>
+        )}
 
         {/* Show Login button if not logged in */}
         {!isLoggedIn && (

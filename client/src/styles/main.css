@@ -80,6 +80,23 @@
   }
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content should take up all available space */
+.main-content {
+  flex: 1;
+}
+
 /* Footer Styles */
 .footer {
   padding-top: 2rem;
@@ -155,6 +172,11 @@
   border-radius: 20px;
   color: whitesmoke;
   background-color: #1fcc04;
+}
+
+.logout-icon {
+  color: white;
+  font-size: 20px;
 }
 
 /* Feature styles */
@@ -247,9 +269,7 @@
   padding: 10vh;
 }
 
-.signup-form > input {
 
-}
 
 .signup-form > button {
   border-radius: 20px;
