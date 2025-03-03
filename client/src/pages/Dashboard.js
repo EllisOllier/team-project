@@ -6,28 +6,6 @@ const Dashboard = () => {
   const [budget, setBudget] = useState(0);
   const [expenses, setExpenses] = useState([]);
 
-  useEffect(() => {
-    // Load budget and expenses from localStorage
-    const savedBudget = localStorage.getItem("budget");
-    const savedExpenses = localStorage.getItem("expenses");
-
-    if (savedBudget) setBudget(parseFloat(savedBudget));
-    if (savedExpenses) setExpenses(JSON.parse(savedExpenses));
-  }, []);
-
-  // Calculate total expenses
-  const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0);
-  const currentBalance = budget - totalSpent;
-
-  // Determine budget status (color-coded)
-  const budgetStatus = budget > 0 ? currentBalance / budget : 0;
-  const balanceClass =
-    budgetStatus > 0.5 ? "positive-balance" :
-    budgetStatus > 0.2 ? "warning-balance" :
-    "negative-balance";
-
-  // Get recent transactions (last 5)
-  const recentTransactions = expenses.slice(-5).reverse();
 
   return (
     <div>
@@ -39,24 +17,11 @@ const Dashboard = () => {
 
       {/* Budget Summary */}
       <h2>Budget Summary</h2>
-      <p className={balanceClass}><strong>Remaining Budget:</strong> £{currentBalance.toFixed(2)}</p>
-      <p><strong>Total Spent:</strong> £{totalSpent.toFixed(2)}</p>
+      <p ><strong>Remaining Budget:</strong> £</p>
+      <p><strong>Total Spent:</strong> £</p>
 
       {/* Recent Transactions */}
       <h2>Recent Transactions</h2>
-      {recentTransactions.length > 0 ? (
-        <ul>
-          {recentTransactions.map((exp) => (
-            <li key={exp.id}>
-              <span className={`expense-category ${exp.category.toLowerCase()}`}>
-                {exp.category}
-              </span> - <strong>£{exp.amount.toFixed(2)}</strong> on {new Date(exp.date).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No recent transactions.</p>
-      )}
 
       {/* View More Transactions Button */}
       {expenses.length > 5 && (
