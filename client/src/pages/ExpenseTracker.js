@@ -134,13 +134,9 @@ const ExpenseTracker = () => {
   };
 
   const resetBudget = () => {
-    if (window.confirm("Are you sure you want to reset your budget? This will clear all expenses.")) {
-      setUserBudget(0);
-      setExpenses([]);
-      localStorage.removeItem("userBudget");
-      localStorage.removeItem("expenses");
-      localStorage.removeItem("recurringExpenses");
-    }
+    // Run api to remove budget and expenses
+    
+    getBudget();
   };
 
   // Calculate total spent and correct remaining balance
