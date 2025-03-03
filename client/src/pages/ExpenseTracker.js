@@ -166,6 +166,7 @@ const ExpenseTracker = () => {
     <div>
       <div className="title-container">
         <h1>Expense Tracker</h1>
+        <h3>Keep track of your expenses on the fly!</h3>
       </div>
       <div className="expense-tracker-container">
       {userBudget === 0 ? (
