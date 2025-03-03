@@ -7,59 +7,26 @@ const ExpenseTracker = () => {
   const [spendDate, setSpendDate] = useState('');
   const [isRecurring, setIsRecurring] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const addExpense = async (event) => {
-    event.preventDefault();
-    try {
-        const response = await fetch('http://localhost:8080/api/expenses/add/add-expense', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ userID, spendAmount, spendCategory, spendDate, isRecurring }),
-          });
-
-          const result = await response.json();
-          if (response.ok) {
-            // Added expense successfully
-            setErrorMessage('');
-            console.log('Successfully added expense!', result);
-            // Store expense to local storage
-            //localStorage.setItem('userID', result.userID)
-          } else {
-            // Add expense failed
-            setErrorMessage(result.error || 'Failed to add expense');
-          }
-    }
-    catch (err) {
-        setErrorMessage('An unexpected error occurred');
-        console.error('Unexpected error:', err);
-    }
-  }
-
-  const [initialBudget, setInitialBudget] = useState(() => {
-    const storedBudget = localStorage.getItem("budget");
+  const [userBudget, setUserBudget] = useState(() => {
+    const storedBudget = localStorage.getItem("userBudget");
     return storedBudget ? parseFloat(storedBudget) : 0;
   });
-
   const [expenses, setExpenses] = useState(() => {
     const savedExpenses = localStorage.getItem("expenses");
     return savedExpenses ? JSON.parse(savedExpenses) : [];
   });
-
   const [recurringExpenses, setRecurringExpenses] = useState(() => {
     const savedRecurringExpenses = localStorage.getItem("recurringExpenses");
     return savedRecurringExpenses ? JSON.parse(savedRecurringExpenses) : [];
   });
-
   const [sortBy, setSortBy] = useState("date");
   const [filterByCategory, setFilterByCategory] = useState("");
 
   const categories = ["Food", "Travel", "Entertainment", "Shopping", "Bills", "Other"];
 
   useEffect(() => {
-    localStorage.setItem("budget", initialBudget);
-  }, [initialBudget]);
+    localStorage.setItem("userBudget", userBudget);
+  }, [userBudget]);
 
   useEffect(() => {
     localStorage.setItem("expenses", JSON.stringify(expenses));
@@ -73,34 +40,83 @@ const ExpenseTracker = () => {
     const today = new Date();
     const currentMonth = today.getMonth();
     const currentYear = today.getFullYear();
-    if (today.getDate()=== 1) {
-    const newExpenses = recurringExpenses.map(exp => {
-      const expenseDate = new Date(exp.date);
-      if (expenseDate.getMonth() !== currentMonth || expenseDate.getFullYear() !== currentYear) {
-        return { ...exp, date: `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(expenseDate.getDate()).padStart(2, '0')}` };
-      }
-      return exp;
-    });
+    if (today.getDate() === 1) {
+      const newExpenses = recurringExpenses.map(exp => {
+        const expenseDate = new Date(exp.date);
+        if (expenseDate.getMonth() !== currentMonth || expenseDate.getFullYear() !== currentYear) {
+          return { ...exp, date: `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(expenseDate.getDate()).padStart(2, '0')}` };
+        }
+        return exp;
+      });
 
-    setExpenses([...expenses, ...newExpenses]);
+      setExpenses([...expenses, ...newExpenses]);
     }
-}, [recurringExpenses]);
+  }, [recurringExpenses]);
 
+  const addExpense = async (event) => {
+    event.preventDefault();
+    console.log(`${userID}, ${spendAmount}, ${spendCategory}, ${spendDate}, ${isRecurring}`);
+    try {
+      const response = await fetch('http://localhost:8080/api/expenses/add/add-expense', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID, spendAmount, spendCategory, spendDate, isRecurring }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        // Added expense successfully
+        setErrorMessage('');
+        console.log('Successfully added expense!', result);
+      } else {
+        // Add expense failed
+        setErrorMessage(result.error || 'Failed to add expense');
+      }
+    } catch (err) {
+      setErrorMessage('An unexpected error occurred');
+      console.error('Unexpected error:', err);
+    }
+  };
+
+  const setBudget = async (budget) => {
+    try {
+      const response = await fetch('http://localhost:8080/api/expenses/budget/set/set-budget', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID: userID, userBudget: budget }), // Pass budget directly
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log('Successfully set budget!', result);
+      } else {
+        setErrorMessage(result.error || 'Failed to set budget');
+      }
+    } catch (err) {
+      setErrorMessage('An unexpected error occurred');
+      console.error('Unexpected error:', err);
+    }
+  };
 
   const handleSetBudget = () => {
-    const userBudget = parseFloat(prompt("Enter your budget:"));
-    if (isNaN(userBudget) || userBudget <= 0) {
+    const inputBudget = parseFloat(prompt("Enter your budget:"));
+    if (isNaN(inputBudget) || inputBudget <= 0) {
       alert("Please enter a valid budget.");
       return;
     }
-    setInitialBudget(userBudget);
+    setUserBudget(inputBudget);
+    setBudget(inputBudget); // Pass inputBudget directly to setBudget
   };
 
   const resetBudget = () => {
     if (window.confirm("Are you sure you want to reset your budget? This will clear all expenses.")) {
-      setInitialBudget(0);
+      setUserBudget(0);
       setExpenses([]);
-      localStorage.removeItem("budget");
+      localStorage.removeItem("userBudget");
       localStorage.removeItem("expenses");
       localStorage.removeItem("recurringExpenses");
     }
@@ -108,7 +124,7 @@ const ExpenseTracker = () => {
 
   // Calculate total spent and correct remaining balance
   const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0);
-  const remainingBudget = initialBudget - totalSpent; // Fix: Correct calculation
+  const remainingBudget = userBudget - totalSpent; // Fix: Correct calculation
 
   const sortedExpenses = [...expenses].sort((a, b) => {
     if (sortBy === "amount") return b.amount - a.amount;
@@ -126,7 +142,7 @@ const ExpenseTracker = () => {
         <h1>Expense Tracker</h1>
       </div>
 
-      {initialBudget === 0 ? (
+      {userBudget === 0 ? (
         <button className="dashboard-button" onClick={handleSetBudget}>Set Your Budget</button>
       ) : (
         <>
