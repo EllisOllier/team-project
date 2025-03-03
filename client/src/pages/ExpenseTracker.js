@@ -41,6 +41,7 @@ const ExpenseTracker = () => {
         console.log('Successfully added expense!', result);
         // Update the expenses state
         setExpenses([...expenses, result.expense]);
+        getExpenses();
       } else {
         // Add expense failed
         setErrorMessage(result.error || 'Failed to add expense');
@@ -102,6 +103,23 @@ const ExpenseTracker = () => {
     }
   };
 
+  const getBudget = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/expenses/budget/set/set-budget', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID: userID, userBudget: 0 }), // Pass budget directly NOTE: CHANGE TO VARAIBLE AS IT IS STATIC 0
+      });
+
+
+    } catch (err) {
+      setErrorMessage('An unexpected error occurred');
+      console.error('Unexpected error:', err);
+    }
+  }
+
   const handleSetBudget = () => {
     const inputBudget = parseFloat(prompt("Enter your budget:"));
     if (isNaN(inputBudget) || inputBudget <= 0) {
@@ -122,8 +140,13 @@ const ExpenseTracker = () => {
     }
   };
 
+  const handleAddExpense = () => {
+    console.log(spendAmount);
+    // addExpense();
+  }
+
   // Calculate total spent and correct remaining balance
-  const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense.spendAmount), 0);
+  const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense?.spendAmount || 0), 0);
   const remainingBudget = userBudget - totalSpent; // Fix: Correct calculation
 
   return (
@@ -170,9 +193,11 @@ const ExpenseTracker = () => {
           <ul>
             {expenses.length > 0 ? (
               expenses.map((expense) => (
-                <li key={expense.id}>
-                  {expense.spendDate} - {expense.spendCategory}: £{expense.spendAmount}
-                </li>
+                expense && (
+                  <li key={expense.id}>
+                    {expense.spendDate} - {expense.spendCategory}: £{expense.spendAmount}
+                  </li>
+                )
               ))
             ) : (
               <p>No expenses found</p>
