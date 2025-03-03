@@ -145,9 +145,11 @@ const ExpenseTracker = () => {
 
       const result = await response.json();
       if (response.ok) {
-        handleSetBudget();
+        // Reset budget and expenses successfully
+        setUserBudget(0);
+        setExpenses([]);
       } else {
-        setErrorMessage(result.error || 'Failed to fetch budget');
+        setErrorMessage(result.error || 'Failed to reset budget and expenses');
       }
 
     } catch (err) {
