@@ -133,15 +133,32 @@ const ExpenseTracker = () => {
     setBudget(inputBudget); // Pass inputBudget directly to setBudget
   };
 
-  const resetBudget = () => {
-    // Run api to remove budget and expenses
-    
-    getBudget();
+  const resetBudget = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/expenses/reset/reset-budget-expense', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userID: userID }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        handleSetBudget();
+      } else {
+        setErrorMessage(result.error || 'Failed to fetch budget');
+      }
+
+    } catch (err) {
+      setErrorMessage('An unexpected error occurred');
+      console.error('Unexpected error:', err);
+    }
   };
 
   // Calculate total spent and correct remaining balance
   const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense?.spendAmount || 0), 0);
-  const remainingBudget = userBudget - totalSpent; // Fix: Correct calculation
+  const remainingBudget = userBudget - totalSpent;
 
   return (
     <div>
