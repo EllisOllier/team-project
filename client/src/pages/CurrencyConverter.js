@@ -3,7 +3,6 @@ import Freecurrencyapi from "@everapi/freecurrencyapi-js";
 import "../styles/main.css";
 
 const CurrencyConverter = () => {
-  // Api key
   const currencyApi = new Freecurrencyapi("fca_live_7IzkWSy6LsA5XsnsG6t7ldzmhfHHJGG3om5pODDr");
 
   const [recentConversions, setRecentConversions] = useState([]);
@@ -59,7 +58,6 @@ const CurrencyConverter = () => {
     const result = amount * rate;
     setConvertedAmount(result.toFixed(2));
 
-    // Add to recent conversions list
     const newConversion = {
       id: Date.now(),
       amount,
@@ -68,11 +66,16 @@ const CurrencyConverter = () => {
       result: result.toFixed(2),
     };
 
-    setRecentConversions((prevConversions) => [newConversion, ...prevConversions].slice(0, 5)); // Keep only last 5
+    setRecentConversions((prevConversions) => [newConversion, ...prevConversions].slice(0, 5));
   };
 
   const handleCalcInput = (value) => {
-    setCalcInput((prev) => prev + value);
+    setCalcInput((prev) => {
+      if (/[\+\-\*\/]$/.test(prev) && /[\+\-\*\/]/.test(value)) {
+        return prev;
+      }
+      return prev + value;
+    });
   };
 
   const clearCalculator = () => {
@@ -82,21 +85,25 @@ const CurrencyConverter = () => {
 
   const calculateResult = () => {
     try {
-      setCalcResult(eval(calcInput).toFixed(2)); // Evaluate the expression
+      setCalcResult(Function(`return ${calcInput}`)().toFixed(2));
     } catch {
       setCalcResult("Error");
     }
   };
 
-  // Keyboard support for the calculator
   useEffect(() => {
     const handleKeyPress = (event) => {
       const { key } = event;
-  
+
       if (/[0-9+\-*/.]/.test(key)) {
-        setCalcInput((prev) => prev + key);
-      } else if (key === "=") {
-        event.preventDefault(); // Prevent default behavior
+        setCalcInput((prev) => {
+          if (/[\+\-\*\/]$/.test(prev) && /[\+\-\*\/]/.test(key)) {
+            return prev;
+          }
+          return prev + key;
+        });
+      } else if (key === "Enter") {
+        event.preventDefault();
         calculateResult();
       } else if (key === "Backspace") {
         setCalcInput((prev) => prev.slice(0, -1));
@@ -104,7 +111,7 @@ const CurrencyConverter = () => {
         clearCalculator();
       }
     };
-  
+
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, []);
@@ -117,7 +124,6 @@ const CurrencyConverter = () => {
       </div>
 
       <div className="main-content two-column-layout">
-        {/* Currency Converter */}
         <div className="currency-converter-container">
           <h2>Currency Converter</h2>
           <label htmlFor="amount-currency">
@@ -165,7 +171,6 @@ const CurrencyConverter = () => {
           )}
         </div>
 
-        {/* Calculator */}
         <div className="currency-converter-container">
           <h2>Calculator</h2>
           <div className="calculator-display">
