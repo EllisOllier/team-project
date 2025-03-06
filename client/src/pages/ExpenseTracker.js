@@ -154,9 +154,23 @@ const ExpenseTracker = () => {
 
   console.log("Filtered Expenses:", filteredExpenses); // Log filtered expenses to check
 
+  // Store the remaining budget to the local storage
+  const updateLocalStorage = (budget, totalSpent, remainingBudget) => {
+    localStorage.setItem('userBudget', budget);
+    localStorage.setItem('totalSpent', totalSpent);
+    localStorage.setItem('remainingBudget', remainingBudget);
+  }
+
+  // Update the remaining budget and the local storage
+  const updateBudget = (event) => {
+    setSpendAmount(event.target.value);
+    updateLocalStorage(userBudget, totalSpent, remainingBudget);
+  }
+
   // Calculate total spent
   const totalSpent = expenses.reduce((sum, expense) => sum + Number(expense?.spendAmount || 0), 0);
   const remainingBudget = userBudget - totalSpent;
+  updateLocalStorage(userBudget, totalSpent, remainingBudget);
 
   return (
     <div>
@@ -180,7 +194,7 @@ const ExpenseTracker = () => {
                   type="number"
                   placeholder="Expense Amount"
                   value={spendAmount}
-                  onChange={(e) => setSpendAmount(e.target.value)}
+                  onChange={(e) => updateBudget(e)} 
                 />
                 <select value={spendCategory} onChange={(e) => setSpendCategory(e.target.value)}>
                   <option value="">Select Category</option>

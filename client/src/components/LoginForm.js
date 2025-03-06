@@ -32,7 +32,8 @@ const LoginForm = () => {
         setErrorMessage('');
         console.log('Login successful', result);
         // Store userID to local storage
-        localStorage.setItem('userID', result.userID)
+        localStorage.setItem('userID', result.userID);
+        localStorage.setItem('username', result.userUsername);
         //update login status 
         setIsLoggedIn(true);
         // Redirect or perform further actions here
