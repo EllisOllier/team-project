@@ -73,6 +73,27 @@ const ExpenseTracker = () => {
     }
   };
 
+  const removeExpense = async (expenseId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/expenses/remove/remove-expense`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userID, expenseId }),
+      });
+  
+      const result = await response.json();
+      if (response.ok) {
+        setExpenses(expenses.filter(expense => expense._id !== expenseId));
+        setErrorMessage("");
+      } else {
+        setErrorMessage(result.error || "Failed to remove expense");
+      }
+    } catch (err) {
+      setErrorMessage("An unexpected error occurred");
+      console.error("Unexpected error:", err);
+    }
+  };
+
   // Fetch Budget
   const getBudget = async () => {
     try {
@@ -222,6 +243,9 @@ const ExpenseTracker = () => {
                   filteredExpenses.map((expense, index) => (
                     <li key={index}>
                       {expense?.spendDate} - {expense?.spendCategory}: £{expense?.spendAmount}
+                      <button onClick={() => removeExpense(expense._id)}style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                      <i className="fas fa-times"></i>
+                      </button>
                     </li>
                   ))
                 ) : (
