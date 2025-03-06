@@ -18,8 +18,23 @@
   background-color: #1fcc04;
 }
 
+#set-budget-container {
+  display: flex;
+  padding: 10vh;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+}
+
 #set-budget-button {
-  margin: 5vh;
+  border: none;
+  border-radius: 20px;
+  padding: 1vh;
+  color: whitesmoke;
+  background-color: #1fcc04;
+  margin-top: 3vh;
 }
 
 .expense-tracker-container {
