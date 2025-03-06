@@ -182,8 +182,8 @@ html, body {
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  flex-direction: auto 1fr auto;
   min-height: 100vh;
 }
 
