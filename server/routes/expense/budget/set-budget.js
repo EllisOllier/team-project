@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-// import controllers
+// Get controller for api route
 const { setBudget } = require('../../../controllers/expense/budget/set-budget');
 
-
-// api routes
+// Setup api route
 router.post('/set-budget', setBudget);
 router.use((req, res) => {
   res.status(404).json({ error: 'Not Found' });
