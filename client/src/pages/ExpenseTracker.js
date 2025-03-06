@@ -157,6 +157,71 @@ const ExpenseTracker = () => {
         <h3>Keep track of your expenses on the fly!</h3>
       </div>
       <div className="expense-tracker-container">
+      {userBudget === 0 ? (
+        <div id="set-budget-container">
+          <h3>Ohh. It looks like you don't have a budget lets get one setup.</h3>
+          <button  id="set-budget-button" onClick={handleSetBudget}>Set Your Budget</button>
+        </div>
+      ) : (
+        <>
+          <h3>Remaining Budget: £{remainingBudget.toFixed(2)}</h3>
+        <div className="add-expense-container">
+          <div className="expense-form">
+          <input
+            type="number"
+            placeholder="Expense Amount"
+            value={spendAmount}
+            onChange={(e) => setSpendAmount(e.target.value)}
+          />
+
+          <select value={spendCategory} onChange={(e) => setSpendCategory(e.target.value)}>
+            <option value="">Select Category</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+
+          <input type="date" value={spendDate} onChange={(e) => setSpendDate(e.target.value)} />
+          <label>
+            <input type="checkbox" checked={isRecurring} onChange={(e) => setIsRecurring(e.target.checked)} />
+            Recurring
+          </label>
+          </div>
+          <div className="add-expense-button-container">
+            <button className="button" onClick={addExpense}>Add Expense</button>
+          </div>
+        </div>
+        <div className="tracker-cont">
+        <div className="sort-filter-container">
+        <h3>Sort & Filter</h3>
+          <div>
+            
+          </div>
+        </div>
+        <div className="expense-list-container">
+        <h3>Expense List</h3>
+          <ul>
+            {expenses.length > 0 ? (
+              expenses.map((expense) => (
+                expense && (
+                  <li key={expense.id}>
+                    {expense.spendDate} - {expense.spendCategory}: £{expense.spendAmount}
+                  </li>
+                )
+              ))
+            ) : (
+              <p>No expenses found</p>
+            )}
+          </ul>
+        </div>
+        </div>
+          <button onClick={resetBudget} id="reset-button">
+            Reset Budget
+          </button>
+        </>
+      )}
         {userBudget === 0 ? (
           <button className="button" id="set-budget-button" onClick={() => setBudget(parseFloat(prompt("Enter your budget:")))}>
             Set Your Budget
