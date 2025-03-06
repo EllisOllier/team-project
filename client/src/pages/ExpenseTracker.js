@@ -37,7 +37,6 @@ const ExpenseTracker = () => {
 
       const result = await response.json();
       if (response.ok) {
-        console.log("Fetched expenses:", result.expenses); // Log expenses to check the structure
         setExpenses(result.expenses);
         setErrorMessage("");
       } else {
@@ -151,8 +150,6 @@ const ExpenseTracker = () => {
       if (sortBy === "date") return new Date(b.spendDate) - new Date(a.spendDate);
       return 0;
     });
-
-  console.log("Filtered Expenses:", filteredExpenses); // Log filtered expenses to check
 
   // Store the remaining budget to the local storage
   const updateLocalStorage = (budget, totalSpent, remainingBudget) => {
