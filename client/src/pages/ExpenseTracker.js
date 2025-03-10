@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 const ExpenseTracker = () => {
   // Expense data variables
+  const [spendID, setSpendID] = useState();
   const [userID, setUserID] = useState(localStorage.getItem("userID"));
   const [spendAmount, setSpendAmount] = useState("");
   const [spendCategory, setSpendCategory] = useState("");
@@ -72,17 +73,17 @@ const ExpenseTracker = () => {
     }
   };
 
-  const removeExpense = async (expenseId) => {
+  const removeExpense = async (spendID) => {
     try {
       const response = await fetch(`http://localhost:8080/api/expenses/remove/remove-expense`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userID, expenseId }),
+        body: JSON.stringify({ spendID }),
       });
   
       const result = await response.json();
       if (response.ok) {
-        setExpenses(expenses.filter(expense => expense._id !== expenseId));
+        setExpenses(expenses.filter(expense => expense.spendID !== spendID));
         setErrorMessage("");
       } else {
         setErrorMessage(result.error || "Failed to remove expense");
@@ -254,7 +255,7 @@ const ExpenseTracker = () => {
                   filteredExpenses.map((expense, index) => (
                     <li key={index}>
                       {expense?.spendDate} - {expense?.spendCategory}: £{expense?.spendAmount}
-                      <button onClick={() => removeExpense(expense._id)}style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                      <button onClick={() => removeExpense(expense.spendID)}style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                       <i className="fas fa-times"></i>
                       </button>
                     </li>

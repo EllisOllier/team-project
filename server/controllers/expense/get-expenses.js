@@ -14,7 +14,7 @@ export const getExpenses = async (req, res) => {
     // Navigate to userSpendData table and select all data where it is equal to the userID provided in the request body
     const { data, error } = await supabase
       .from('userSpendData')
-      .select('userID, spendAmount, spendCategory, spendDate, isRecurring')
+      .select('spendID, userID, spendAmount, spendCategory, spendDate, isRecurring')
       .eq('userID', userID)
 
     if (error) {
