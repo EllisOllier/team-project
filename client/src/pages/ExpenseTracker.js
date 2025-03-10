@@ -223,10 +223,6 @@ const ExpenseTracker = () => {
                   ))}
                 </select>
                 <input type="date" value={spendDate} onChange={(e) => setSpendDate(e.target.value)} />
-                <label>
-                  <input type="checkbox" checked={isRecurring} onChange={(e) => setIsRecurring(e.target.checked)} />
-                  Recurring
-                </label>
               </div>
               <button className="button" onClick={addExpense}>Add Expense</button>
             </div>
