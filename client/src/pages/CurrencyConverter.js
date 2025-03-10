@@ -85,9 +85,13 @@ const CurrencyConverter = () => {
 
   const calculateResult = () => {
     try {
-      setCalcResult(Function(`return ${calcInput}`)().toFixed(2));
-    } catch {
+      // Use Function constructor to evaluate the expression
+      const result = new Function(`return ${calcInput}`)();
+      setCalcResult(result.toFixed(2));
+      setCalcInput(""); // Clear the input box
+    } catch (error) {
       setCalcResult("Error");
+      setCalcInput(""); // Clear the input box even on error
     }
   };
 
@@ -96,15 +100,7 @@ const CurrencyConverter = () => {
       const { key } = event;
 
       if (/[0-9+\-*/.]/.test(key)) {
-        setCalcInput((prev) => {
-          if (/[\+\-\*\/]$/.test(prev) && /[\+\-\*\/]/.test(key)) {
-            return prev;
-          }
-          return prev + key;
-        });
-      } else if (key === "Enter") {
-        event.preventDefault();
-        calculateResult();
+        handleCalcInput(key);
       } else if (key === "Backspace") {
         setCalcInput((prev) => prev.slice(0, -1));
       } else if (key === "Escape") {

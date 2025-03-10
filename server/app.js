@@ -1,67 +1,57 @@
-// Import modules
+// import modules
 const express = require("express");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 
-// App
+// app
 const app = express();
 
-// Middleware
-app.use(morgan("dev"));
-app.use(cors({origin : true, credentials : true}));
-app.use(express.json()); // Add this line to parse JSON request bodies
-
-// Routes
-// Declare validateLogin route
-const validateLogin = require("./routes/account/validate-login");
-app.use("/api/user", validateLogin);
-
-// Declare createAccount route
-const createAccount = require("./routes/account/create-account");
-app.use("/api/check", createAccount);
-
-// Declare checkApi route
-const checkApi = require("./routes/api-check");
-app.use("/api/status-check", checkApi);
-
-// Declare addExpense route
-const addExpense = require("./routes/expense/add-expense");
-app.use("/api/expenses/add", addExpense);
-
-// Declare setBudget route
-const setBudget = require("./routes/expense/budget/set-budget");
-app.use("/api/expenses/budget/set", setBudget);
-
-// Declare getBudget route
-const getBudget = require("./routes/expense/budget/get-budget");
-app.use("/api/expenses/budget/get", getBudget);
-
-// Declare resetBudget route
-const resetBudget = require("./routes/expense/budget/reset-budget");
-app.use("/api/expenses/budget/reset", resetBudget);
-
-// Declare getExpenses route
-const getExpenses = require("./routes/expense/get-expenses");
-app.use("/api/expenses/get", getExpenses);
-
-// Declare resetBudgetExpenses route
-const resetBudgetExpenses = require("./routes/expense/reset-budget-expense");
-app.use("/api/expenses/reset", resetBudgetExpenses);
-
-// Use middleware
-app.use(cors({ origin: true, credentials: true }));
-app.use(express.json()); // Middleware to parse JSON request bodies
-
-// Define a catch-all route for undefined routes
-app.use((req, res) => {
-  res.status(404).json({ error: "Not Found" });
+// db
+/*
+const uri = process.env.MONGODB_URI || "mongodb+srv://studentFinanceAdmin:StuFinTracker@cluster0.a38cu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const client = new MongoClient(uri, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
 });
 
-// Server Port
+async function run() {
+    try {
+        // Connect the client to the server
+        await client.connect();
+        // Send a ping to confirm a successful connection
+        await client.db("admin").command({ ping: 1 });
+        console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    } catch (error) {
+        console.error("Failed to connect to MongoDB:", error);
+    }
+}
+
+run().catch(console.dir);
+
+// Keep the client connected for the duration of the app's runtime
+process.on('SIGINT', async () => {
+    await client.close();
+    console.log("MongoDB client disconnected");
+    process.exit(0);
+});
+*/
+// middleware
+app.use(morgan("dev"));
+app.use(cors({origin : true, credentials : true}));
+
+// routes
+const checkApi = require("./routes/api-check");
+app.use("/", checkApi);
+
+// port
 const port = process.env.PORT || 8080;
 
-// Listener
+// listener
 const server = app.listen(port, () => 
     console.log(`Server is running on ${port}`)
 );
