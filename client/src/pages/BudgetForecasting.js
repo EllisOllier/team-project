@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const BudgetForecasting = () => {
-  const [initialBudget, setInitialBudget] = useState(0);
   const [expenses, setExpenses] = useState([]);
   const [warningMessage, setWarningMessage] = useState("");
 

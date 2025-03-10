@@ -6,7 +6,6 @@ const ExpenseTracker = () => {
   const [spendAmount, setSpendAmount] = useState("");
   const [spendCategory, setSpendCategory] = useState("");
   const [spendDate, setSpendDate] = useState("");
-  const [isRecurring, setIsRecurring] = useState(false);
   const [expenses, setExpenses] = useState([]);
   const [userBudget, setUserBudget] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
@@ -55,7 +54,7 @@ const ExpenseTracker = () => {
       const response = await fetch("http://localhost:8080/api/expenses/add/add-expense", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userID, spendAmount, spendCategory, spendDate, isRecurring }),
+        body: JSON.stringify({ userID, spendAmount, spendCategory, spendDate }),
       });
 
       const result = await response.json();
