@@ -102,11 +102,14 @@ const Dashboard = () => {
       </div>
 
       {/* Budget Summary */}
-      <h2>Budget Summary</h2>
-      <p><strong>Remaining Budget:</strong> £{remainingBudget}</p>
-      <p><strong>Total Spent:</strong> £{totalSpent}</p>
+      <div className="card">
+        <h2>Budget Summary</h2>
+        <p><strong>Remaining Budget:</strong> £{remainingBudget}</p>
+        <p><strong>Total Spent:</strong> £{totalSpent}</p>
+      </div>
 
       {/* Recent Transactions */}
+      <div className="card">
       <h2>Recent Transactions</h2>
       <ul>
                 {expenses.length > 0 ? (
@@ -119,6 +122,7 @@ const Dashboard = () => {
                   <p>No expenses found</p>
                 )}
               </ul>
+        </div>
 
       {/* View More Transactions Button */}
       {expenses.length > 5 && (
@@ -126,20 +130,23 @@ const Dashboard = () => {
           <button className="dashboard-button">📜 View All Transactions</button>
         </Link>
       )}
-
       {/* Quick Actions Section */}
-      <h2>Quick Actions</h2>
-      <Link to="/expense-tracker">
-        <button className="dashboard-button">💰 Go to Expense Tracker</button>
-      </Link>
+      <div className="card">
+        <h2>Quick Actions</h2>
+          <div className="button-container">
+           <Link to="/expense-tracker">
+             <button className="dashboard-button">💰 Go to Expense Tracker</button>
+           </Link>
 
-      <Link to="/currency-converter">
-        <button className="dashboard-button">🔄 Open Currency Converter</button>
-      </Link>
+          <Link to="/currency-converter">
+            <button className="dashboard-button">🔄 Open Currency Converter</button>
+          </Link>
 
-      <Link to="/budget-forecasting">
-        <button className="dashboard-button">📊 Budget Forecast</button>
-      </Link>
+          <Link to="/budget-forecasting">
+           <button className="dashboard-button">📊 Budget Forecast</button>
+          </Link>
+      </div>
+     </div>
     </div>
   );
 };
