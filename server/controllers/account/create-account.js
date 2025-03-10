@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import bcrypt from 'bcrypt';
 
 export const createAccount = async (req, res) => {
     // Declare supabase variables
@@ -37,11 +38,14 @@ export const createAccount = async (req, res) => {
             return res.status(409).json({ error: 'Username already exists' });
         }
 
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         // Proceed with account creation
         const { data, error } = await supabase
-        // Navigate to the user table an insert the username and password from the request body
+        // Navigate to the user table and insert the username and hashed password
             .from('user')
-            .insert([{ userUsername: username, userPassword: password }])
+            .insert([{ userUsername: username, userPassword: hashedPassword }])
             .select('userID'); // Select the userID of the newly created user
 
         if (error) {

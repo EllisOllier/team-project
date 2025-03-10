@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/main.css";
 
@@ -11,7 +11,6 @@ const SignUp = () => {
 
     const CheckSignUp = async (event) => {
         event.preventDefault();
-        // Add api call
         try {
             const response = await fetch('http://localhost:8080/api/check/create-account/', {
                 method: 'POST',
@@ -23,17 +22,17 @@ const SignUp = () => {
 
               const result = await response.json();
               if (response.ok) {
-                // Login successful
+                // Account creation successful
                 setErrorMessage('');
                 console.log('Account created successfully!', result);
                 // Store userID to local storage
-                localStorage.setItem('userID', result.userID)
-                //update login status 
+                localStorage.setItem('userID', result.userID);
+                // Update login status
                 setIsLoggedIn(true);
-                // Redirect or perform further actions here
+                // Redirect to the dashboard or perform further actions here
                 navigate("/Dashboard");
               } else {
-                // Login failed
+                // Account creation failed
                 setErrorMessage(result.error || 'Username already exists');
               }
         }
