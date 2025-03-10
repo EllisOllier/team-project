@@ -364,9 +364,8 @@ html, body {
   align-items: center;
   border: 1px solid black;
   padding: 10vh;
+  
 }
-
-
 
 .signup-form > button {
   border-radius: 20px;
@@ -374,11 +373,12 @@ html, body {
   border: none;
   color: whitesmoke;
   padding: 1vw;
-
+  max-width: 150px;
 }
 
 .signup-item {
   width: 50vw;
+  max-width: 350px;
 }
 
 .progress-bar-container {
