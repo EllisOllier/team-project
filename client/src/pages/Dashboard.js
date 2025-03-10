@@ -9,17 +9,7 @@ const Dashboard = () => {
   const [expenses, setExpenses] = useState([]);
   const [username, setUsername] = useState("");
   const [userID, setUserID] = useState(localStorage.getItem("userID"));
-  const [spendAmount, setSpendAmount] = useState("");
-  const [spendCategory, setSpendCategory] = useState("");
-  const [spendDate, setSpendDate] = useState("");
-  const [isRecurring, setIsRecurring] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
-  // Sorting & Filtering
-  const [sortBy, setSortBy] = useState("date");
-  const [filterCategory, setFilterCategory] = useState("");
-
-  const categories = ["Food", "Travel", "Entertainment", "Shopping", "Bills", "Other"];
 
   useEffect(() => {
     getExpenses();

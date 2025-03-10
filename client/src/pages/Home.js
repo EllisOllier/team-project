@@ -1,7 +1,6 @@
 // Import neccessary files
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ApiAliveStatus from '../components/ApiAliveStatus';
 import "../styles/main.css";
 
 const Home = () => {

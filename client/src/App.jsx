@@ -11,7 +11,6 @@ import BudgetForecasting from './pages/BudgetForecasting';
 import SignUp from './pages/SignUp';
 
 // Components
-import LoginForm from './components/LoginForm';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 
