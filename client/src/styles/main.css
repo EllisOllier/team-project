@@ -418,8 +418,13 @@ html, body {
 .currency-output-container {
   margin-top: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.currency-output-container > button {
+  margin-bottom: 1vh;
 }
 
 .convert-button {
