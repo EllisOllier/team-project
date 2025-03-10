@@ -570,6 +570,13 @@ html, body {
   }
 }
 
+.calculator-container {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 5px 5px 0px 0px black;
+}
+
 .calculator-buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -580,6 +587,25 @@ html, body {
   padding: 10px;
   font-size: 18px;
   cursor: pointer;
+}
+
+.previous-calculations {
+  border: 1px solid black;
+  box-shadow: 5px 5px 0px 0px black;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.previous-calculations > ul {
+  padding-top: 1vh;
+  list-style: none;
+}
+
+.calculator-outer-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 /* Dark Mode */

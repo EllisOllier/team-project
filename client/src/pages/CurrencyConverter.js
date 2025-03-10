@@ -10,6 +10,7 @@ const CurrencyConverter = () => {
 
   const [calcInput, setCalcInput] = useState("");
   const [calcResult, setCalcResult] = useState("");
+  const [previousCalculations, setPreviousCalculations] = useState([]);
 
   const currencies = [
     { code: "GBP", symbol: "£" },
@@ -88,6 +89,10 @@ const CurrencyConverter = () => {
       // Use Function constructor to evaluate the expression
       const result = new Function(`return ${calcInput}`)();
       setCalcResult(result.toFixed(2));
+      setPreviousCalculations((prev) => [
+        `${calcInput} = ${result.toFixed(2)}`,
+        ...prev,
+      ]);
       setCalcInput(""); // Clear the input box
     } catch (error) {
       setCalcResult("Error");
@@ -166,8 +171,20 @@ const CurrencyConverter = () => {
             </div>
           )}
         </div>
-
-        <div className="currency-converter-container">
+        <div className="calculator-outer-container">
+        <div className="previous-calculations">
+          <h3>Calculator History:</h3>
+          <ul>
+            {previousCalculations.length > 0 ? (
+              previousCalculations.map((calculation, index) => (
+                <li key={index}>{calculation}</li>
+              ))
+            ) : (
+              <p>No calculations found</p>
+            )}
+          </ul>
+        </div>
+        <div className="calculator-container">
           <h2>Calculator</h2>
           <div className="calculator-display">
             <input type="text" value={calcInput} readOnly />
@@ -191,6 +208,7 @@ const CurrencyConverter = () => {
             <button onClick={calculateResult}>=</button>
             <button onClick={() => handleCalcInput("/")}>/</button>
           </div>
+        </div>
         </div>
       </div>
     </div>
