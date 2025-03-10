@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 const ExpenseTracker = () => {
   // Expense data variables
-  const [spendID, setSpendID] = useState();
   const [userID, setUserID] = useState(localStorage.getItem("userID"));
   const [spendAmount, setSpendAmount] = useState("");
   const [spendCategory, setSpendCategory] = useState("");
