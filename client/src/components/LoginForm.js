@@ -1,17 +1,22 @@
-// Import neccessary files
-import {React, useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import "../styles/main.css";
 
-
 const LoginForm = () => {
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const navigate = useNavigate();
+
   const [showForm, setShowForm] = useState(true);
-  const navigate = useNavigate(); // Create a navigation function
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      setShowForm(false);
+    }
+  }, [isLoggedIn]);
 
   const checkLogin = async (event) => {
     event.preventDefault();
@@ -28,18 +33,13 @@ const LoginForm = () => {
       const result = await response.json();
 
       if (response.ok) {
-        // Login successful
         setErrorMessage('');
         console.log('Login successful', result);
-        // Store userID to local storage
         localStorage.setItem('userID', result.userID);
         localStorage.setItem('username', result.userUsername);
-        //update login status 
         setIsLoggedIn(true);
-        // Redirect or perform further actions here
-        navigate("/Dashboard");
+        navigate("/dashboard");
       } else {
-        // Login failed
         setErrorMessage(result.error || 'Invalid username or password');
       }
     } catch (err) {
@@ -48,22 +48,13 @@ const LoginForm = () => {
     }
   };
 
-  if (isLoggedIn || !showForm) {
+  if (!showForm) {
     return null;
   }
-  
 
   return (
     <form className="login-form" onSubmit={checkLogin}>
       <h2 id="login-title">Login</h2>
-      <button
-        id="exit-button"
-        type="button"
-        onClick={() => setShowForm(false)}
-        style={{ position: 'absolute', top: '10px', right: '10px', background: 'none', border: 'none', fontSize: '20px', cursor: 'pointer' }}
-      >
-        &times;
-      </button>
       <label htmlFor="username"></label>
       <input
         type="text"
