@@ -21,7 +21,7 @@ export const addExpense = async (req, res) => {
         // Navigate to userSpendData in database and insert the inputs provided from the request body
         const { data, error } = await supabase
             .from('userSpendData')
-            .insert([{ userID, spendAmount, spendCategory, spendDate, isRecurring }]);
+            .insert([{ userID, spendAmount, spendCategory, spendDate }]);
         
         // If there is an error return status 500 and provide the error message
         if (error) {
