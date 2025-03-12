@@ -14,7 +14,6 @@ const Footer = () => {
         <li className="footer-item"><Link to="/dashboard">Dashboard</Link></li>
         <li className="footer-item"><Link to="/currency-converter">Currency Converter</Link></li>
         <li className="footer-item"><Link to="/expense-tracker">Expense Tracker</Link></li>
-        <li className="footer-item"><Link to="/budget-forecasting">Budget Forecasting</Link></li>
       </ul>
       <ApiAliveStatus />
     </footer>

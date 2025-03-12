@@ -7,7 +7,6 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import CurrencyConverter from './pages/CurrencyConverter';
 import ExpenseTracker from './pages/ExpenseTracker';
-import BudgetForecasting from './pages/BudgetForecasting';
 import SignUp from './pages/SignUp';
 
 // Components
@@ -24,7 +23,6 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/currency-converter" element={<CurrencyConverter />} />
         <Route path="/expense-tracker" element={<ExpenseTracker />} />
-        <Route path="/budget-forecasting" element={<BudgetForecasting />} />
         <Route path="/sign-up" element={<SignUp />}></Route>
       </Routes>
       <Footer />
