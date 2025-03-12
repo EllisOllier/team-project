@@ -29,8 +29,6 @@ const NavBar = () => {
         {isLoggedIn && (
           <>
             <li className="navbar-item"><Link to="/dashboard">Dashboard</Link></li>
-            <li className="navbar-item"><Link to="/profile">Profile</Link></li>
-            <li className="navbar-item"><Link to="/settings">Settings</Link></li>
             <li className="navbar-item"><Link to="/expense-tracker">Expense Tracker</Link></li>
             <li className="navbar-item"><Link to="/budget-forecasting">Budget Forecasting</Link></li>
           </>
