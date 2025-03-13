@@ -3,26 +3,19 @@ import LoginForm from "./LoginForm"; // Ensure the correct path
 import { Link, useNavigate } from 'react-router-dom';
 import "../styles/main.css";
 import DarkModeToggle from './DarkModeToggle'; // Import Dark Mode Toggle
+import { useAuth } from '../context/AuthContext';
 
 const NavBar = () => {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate(); // Create a navigation function
-  
-
-  // Check if user is logged in
-  useEffect(() => {
-    const userID = localStorage.getItem("userID");
-    setIsLoggedIn(!!userID); // Convert to boolean (true if userID exists)
-  }, []);
+  const { isLoggedIn, logout } = useAuth();
 
   const toggleLoginForm = () => {
     setIsLoginFormVisible(!isLoginFormVisible);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('userID');
-    setIsLoggedIn(false);
+    logout();
     navigate("/");
   }
 
@@ -37,7 +30,6 @@ const NavBar = () => {
           <>
             <li className="navbar-item"><Link to="/dashboard">Dashboard</Link></li>
             <li className="navbar-item"><Link to="/expense-tracker">Expense Tracker</Link></li>
-            <li className="navbar-item"><Link to="/budget-forecasting">Budget Forecasting</Link></li>
           </>
         )}
 

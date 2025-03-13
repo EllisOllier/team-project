@@ -1,5 +1,6 @@
 // Import modules
 const express = require("express");
+
 const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
@@ -8,6 +9,38 @@ require("dotenv").config();
 const app = express();
 
 // Middleware
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.use(morgan("dev"));
 app.use(cors({origin : true, credentials : true}));
 app.use(express.json()); // Add this line to parse JSON request bodies
@@ -48,6 +81,10 @@ app.use("/api/expenses/get", getExpenses);
 // Declare resetBudgetExpenses route
 const resetBudgetExpenses = require("./routes/expense/reset-budget-expense");
 app.use("/api/expenses/reset", resetBudgetExpenses);
+
+// Declare removeExpense route
+const removeExpense = require("./routes/expense/remove-expense");
+app.use("/api/expenses/remove", removeExpense);
 
 // Use middleware
 app.use(cors({ origin: true, credentials: true }));

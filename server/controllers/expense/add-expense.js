@@ -9,11 +9,11 @@ export const addExpense = async (req, res) => {
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     // Declare expected input for the request
-    const { userID, spendAmount, spendCategory, spendDate, isRecurring } = req.body;
+    const { userID, spendAmount, spendCategory, spendDate } = req.body;
     console.log("Request Body:", req.body);
 
     // Check if any of the expected inputs are missing and return status 400
-    if (!userID || !spendAmount || !spendCategory || !spendDate || isRecurring === undefined) {
+    if (!userID || !spendAmount || !spendCategory || !spendDate) {
         return res.status(400).json({ error: 'Please enter all required data!' });
     }
 
@@ -21,7 +21,7 @@ export const addExpense = async (req, res) => {
         // Navigate to userSpendData in database and insert the inputs provided from the request body
         const { data, error } = await supabase
             .from('userSpendData')
-            .insert([{ userID, spendAmount, spendCategory, spendDate, isRecurring }]);
+            .insert([{ userID, spendAmount, spendCategory, spendDate }]);
         
         // If there is an error return status 500 and provide the error message
         if (error) {

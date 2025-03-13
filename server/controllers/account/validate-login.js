@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import bcrypt from 'bcrypt';
 
 export const validateLogin = async (req, res) => {
   // Declare supabase variables
@@ -25,10 +26,12 @@ export const validateLogin = async (req, res) => {
       return res.status(500).json({ error: 'Error fetching user data' });
     }
 
-    // Checks if the userPassword associated with the userUsername is equal to the password in the request body
-    if (data && data.userPassword === password) {
+    // Compare the provided password with the hashed password
+    const isMatch = await bcrypt.compare(password, data.userPassword);
+
+    if (isMatch) {
       // Login successful - Return status 200 letting the client know the login was successful
-      return res.status(200).json({ message: 'Login successful', userUsername: data.userUsername, userID: data.userID});
+      return res.status(200).json({ message: 'Login successful', userUsername: data.userUsername, userID: data.userID });
     } else {
       // Login failed - Return status 401 letting the client know the username or password was invalid
       return res.status(401).json({ error: 'Invalid username or password' });
@@ -36,7 +39,7 @@ export const validateLogin = async (req, res) => {
   } catch (err) {
     // Output errors to the server console
     console.error('Unexpected error:', err);
-    // Return status 500 to the client letting them know an unexpected error occured
+    // Return status 500 to the client letting them know an unexpected error occurred
     return res.status(500).json({ error: 'An unexpected error occurred' });
   }
 };

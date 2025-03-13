@@ -6,7 +6,6 @@ const ExpenseTracker = () => {
   const [spendAmount, setSpendAmount] = useState("");
   const [spendCategory, setSpendCategory] = useState("");
   const [spendDate, setSpendDate] = useState("");
-  const [isRecurring, setIsRecurring] = useState(false);
   const [expenses, setExpenses] = useState([]);
   const [userBudget, setUserBudget] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
@@ -55,7 +54,7 @@ const ExpenseTracker = () => {
       const response = await fetch("http://localhost:8080/api/expenses/add/add-expense", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userID, spendAmount, spendCategory, spendDate, isRecurring }),
+        body: JSON.stringify({ userID, spendAmount, spendCategory, spendDate }),
       });
 
       const result = await response.json();
@@ -72,17 +71,17 @@ const ExpenseTracker = () => {
     }
   };
 
-  const removeExpense = async (expenseId) => {
+  const removeExpense = async (spendID) => {
     try {
       const response = await fetch(`http://localhost:8080/api/expenses/remove/remove-expense`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userID, expenseId }),
+        body: JSON.stringify({ spendID }),
       });
   
       const result = await response.json();
       if (response.ok) {
-        setExpenses(expenses.filter(expense => expense._id !== expenseId));
+        setExpenses(expenses.filter(expense => expense.spendID !== spendID));
         setErrorMessage("");
       } else {
         setErrorMessage(result.error || "Failed to remove expense");
@@ -223,10 +222,6 @@ const ExpenseTracker = () => {
                   ))}
                 </select>
                 <input type="date" value={spendDate} onChange={(e) => setSpendDate(e.target.value)} />
-                <label>
-                  <input type="checkbox" checked={isRecurring} onChange={(e) => setIsRecurring(e.target.checked)} />
-                  Recurring
-                </label>
               </div>
               <button className="button" onClick={addExpense}>Add Expense</button>
             </div>
@@ -254,7 +249,7 @@ const ExpenseTracker = () => {
                   filteredExpenses.map((expense, index) => (
                     <li key={index}>
                       {expense?.spendDate} - {expense?.spendCategory}: £{expense?.spendAmount}
-                      <button onClick={() => removeExpense(expense._id)}style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                      <button onClick={() => removeExpense(expense.spendID)}style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                       <i className="fas fa-times"></i>
                       </button>
                     </li>
