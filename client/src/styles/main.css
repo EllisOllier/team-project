@@ -677,6 +677,25 @@ body {
   background-color: #19a603;
 }
 
+
+.fas.fa-times {
+  color: #ff4d4f;        /* Red color for delete icon */
+  font-size: 1.2rem;     /* Size of the icon */
+  margin-left: 10px;     /* Space between text and icon */
+  transition: color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;       /* Pointer cursor on hover */
+}
+
+.fas.fa-times:hover {
+  color: #ff1a1a;        /* Darker red on hover */
+  transform: scale(1.2); /* Slight zoom effect on hover */
+}
+
+.fas.fa-times:focus {
+  outline: none;
+  color: #cc0000;
+}
+
 .dark-mode .toggle-button {
   background-color: #555;
 }
