@@ -9,7 +9,7 @@ export const addExpense = async (req, res) => {
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     // Declare expected input for the request
-    const { userID, spendAmount, spendCategory, spendDate } = req.body;
+    let { userID, spendAmount, spendCategory, spendDate } = req.body;
     console.log("Request Body:", req.body);
 
     // Check if any of the expected inputs are missing and return status 400
@@ -18,6 +18,8 @@ export const addExpense = async (req, res) => {
     }
 
     try {
+        // Remove any decimals after the initial first two
+        spendAmount = Math.floor(spendAmount * 100) / 100;
         // Navigate to userSpendData in database and insert the inputs provided from the request body
         const { data, error } = await supabase
             .from('userSpendData')
