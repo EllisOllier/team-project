@@ -48,11 +48,11 @@ app.use(express.json()); // Add this line to parse JSON request bodies
 // Routes
 // Declare validateLogin route
 const validateLogin = require("./routes/account/validate-login");
-app.use("/api/user", validateLogin);
+app.use("/api/user/signin", validateLogin);
 
 // Declare createAccount route
 const createAccount = require("./routes/account/create-account");
-app.use("/api/check", createAccount);
+app.use("/api/user/signup", createAccount);
 
 // Declare checkApi route
 const checkApi = require("./routes/api-check");

@@ -22,7 +22,7 @@ const LoginForm = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/api/user/validate-login', {
+      const response = await fetch('http://localhost:8080/api/user/signin/validate-login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +34,6 @@ const LoginForm = () => {
 
       if (response.ok) {
         setErrorMessage('');
-        console.log('Login successful', result);
         localStorage.setItem('userID', result.userID);
         localStorage.setItem('username', result.userUsername);
         setIsLoggedIn(true);
