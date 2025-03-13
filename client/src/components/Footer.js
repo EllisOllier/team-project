@@ -1,24 +1,17 @@
-// Import neccessary files
-import React from 'react';
-import { Link } from 'react-router-dom';
-import "../styles/main.css";
-import ApiAliveStatus from './ApiAliveStatus';
-import '../components/ApiAliveStatus.css';
+// Import necessary files
+import React from 'react'; // Import React library
+import "../styles/main.css"; // Import main stylesheet
+import ApiAliveStatus from './ApiAliveStatus'; // Import the API status checker component
+import '../components/ApiAliveStatus.css'; // Import CSS specifically for the ApiAliveStatus component
 
+// Define the Footer component
 const Footer = () => {
   return (
-    // Add html below
+    // JSX for the footer section
     <footer className="footer">
-      <ul className="footer-list">
-        <li className="footer-item"><Link to="/">Home</Link></li>
-        <li className="footer-item"><Link to="/dashboard">Dashboard</Link></li>
-        <li className="footer-item"><Link to="/currency-converter">Currency Converter</Link></li>
-        <li className="footer-item"><Link to="/expense-tracker">Expense Tracker</Link></li>
-      </ul>
       <ApiAliveStatus />
     </footer>
-    // Add html above
   );
 };
 
-export default Footer;
+export default Footer; // Export the Footer component
