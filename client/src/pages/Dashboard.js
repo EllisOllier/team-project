@@ -151,11 +151,6 @@ const Dashboard = () => {
           <Link to="/currency-converter">
             <button className="dashboard-button">🔄 Open Currency Converter</button>
           </Link>
-
-          {/* Link to Budget Forecasting page */}
-          <Link to="/budget-forecasting">
-            <button className="dashboard-button">📊 Budget Forecast</button>
-          </Link>
         </div>
       </div>
     </div>
