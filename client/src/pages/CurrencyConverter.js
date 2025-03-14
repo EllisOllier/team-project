@@ -170,7 +170,7 @@ const CurrencyConverter = () => {
 
           {/* Dropdowns for selecting currencies */}
           <div className="currency-from-to-container">
-            <label htmlFor="from-currency">From currency</label>
+            <label htmlFor="from-currency">From </label>
             <select id="from-currency">
               {currencies.map((currency) => (
                 <option key={currency.code} value={currency.code}>
@@ -181,7 +181,7 @@ const CurrencyConverter = () => {
 
             <span> → </span>
 
-            <label htmlFor="to-currency">To currency</label>
+            <label htmlFor="to-currency">To </label>
             <select id="to-currency">
               {currencies.map((currency) => (
                 <option key={currency.code} value={currency.code}>
