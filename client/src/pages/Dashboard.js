@@ -103,17 +103,17 @@ const Dashboard = () => {
         <h3>Welcome back{username}! Keep your finances on track. 🚀</h3>
       </div>
 
-<div className="dashboard-container">
+      {/* HI */}
 
-{/* Show "View All Transactions" button if there are more than 5 expenses */}
-{expenses.length > 5 && (
-        <Link to="/expense-tracker">
-          <button className="dashboard-button">📜 View All Transactions</button>
-        </Link>
-      )}
-
-  {/* Left Section (Quick Actions + Recent Transactions) */}
+      <div className="dashboard-container">
+  {/* Left Section: Budget Summary & Quick Actions */}
   <div className="left-section">
+    <div className="card">
+      <h2>Budget Summary</h2>
+      <p><strong>Remaining Budget:</strong> £{remainingBudget}</p>
+      <p><strong>Total Spent:</strong> £{totalSpent}</p>
+    </div>
+
     <div className="card">
       <h2>Quick Actions</h2>
       <div className="button-container">
@@ -123,9 +123,18 @@ const Dashboard = () => {
         <Link to="/currency-converter">
           <button className="dashboard-button">🔄 Open Currency Converter</button>
         </Link>
+        {/* Show "View All Transactions" button if there are more than 5 expenses */}
+        {expenses.length > 5 && (
+          <Link to="/expense-tracker">
+            <button className="dashboard-button">📜 View All Transactions</button>
+          </Link>
+        )}
       </div>
     </div>
+  </div>
 
+  {/* Right Section: Recent Transactions */}
+  <div className="right-section">
     <div className="card">
       <h2>Recent Transactions</h2>
       <ul>
@@ -141,17 +150,10 @@ const Dashboard = () => {
       </ul>
     </div>
   </div>
-
-  {/* Right Section (Budget Summary) */}
-  <div className="right-section">
-    <div className="card">
-      <h2>Budget Summary</h2>
-      <p><strong>Remaining Budget:</strong> £{remainingBudget}</p>
-      <p><strong>Total Spent:</strong> £{totalSpent}</p>
-    </div>
-  </div>
-  </div>
 </div>
+
+</div>
+    
 
   );
 };
