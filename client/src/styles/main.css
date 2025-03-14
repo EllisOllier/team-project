@@ -445,7 +445,7 @@ html, body {
 /* Dashboard Main Layout */
 .dashboard-container {
   display: flex;
-  justify-content: center; /* Aligns items to the left and right */
+  justify-content: center; /* Aligns items to the center */
   align-items: flex-start; /* Aligns items to the top */
   gap: 32px; /* Spacing between left and right sections */
   max-width: 1000px; /* Prevents everything from being too wide */
@@ -461,13 +461,12 @@ html, body {
 .left-section {
   display: flex;
   flex-direction: column;
-  gap: 0px; /* Adds space between cards */
-  width: 50%; /* Adjust width */
+  width: 50%;
 }
 
 /* Right Section (Recent Transactions) */
 .right-section {
-  width: 50%; /* Adjust width */
+  width: 50%; 
 }
 
 /* Mobile Responsive: Stack Items */
