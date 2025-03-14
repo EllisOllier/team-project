@@ -444,16 +444,41 @@ html, body {
 
 /* Dashboard Main Layout */
 .dashboard-container {
-  padding: 20px;
-  max-width: 900px; /* Increased width for better layout */
-  margin: auto;
-  text-align: center;
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  justify-content: center; /* Centers everything */
+  align-items: flex-start; /* Aligns items at the top */
+  gap: 3px; /* Spacing between left and right sections */
+  max-width: 900px; /* Prevents everything from being too wide */
+  margin: auto; /* Centers the whole container */
+  padding: 20px;
 }
 
+/* Left Section (Quick Actions & Recent Transactions) */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1px; /* Adds space between the cards */
+}
+
+/* Right Section (Budget Summary) */
+.right-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Adds space between the cards */
+}
+
+/* Mobile Responsive: Stack Items */
+@media (max-width: 768px) {
+  .dashboard-container {
+      flex-direction: column; /* Stack on mobile */
+      align-items: center; /* Keep center alignment */
+  }
+
+  .left-section, .right-section {
+    width: 100%;
+    align-items: center;
+}
+}
 
 /* Title Section */
 .dashboard-title {
@@ -466,6 +491,8 @@ html, body {
   font-size: 24px;
   font-weight: bold;
 }
+
+
 
 /* Card Layout */
 .card {
