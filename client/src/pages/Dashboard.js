@@ -103,7 +103,7 @@ const Dashboard = () => {
         <h3>Welcome back{username}! Keep your finances on track. 🚀</h3>
       </div>
 
-      <div className="dashboard-container">
+<div className="dashboard-container">
 
 {/* Show "View All Transactions" button if there are more than 5 expenses */}
 {expenses.length > 5 && (

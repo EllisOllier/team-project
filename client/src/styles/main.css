@@ -451,6 +451,9 @@ html, body {
   max-width: 900px; /* Prevents everything from being too wide */
   margin: auto; /* Centers the whole container */
   padding: 20px;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Left Section (Quick Actions & Recent Transactions) */
@@ -504,12 +507,13 @@ html, body {
   width: 650px; /* Set a fixed width for consistency */
   text-align: center;
   transition: transform 0.2s ease-in-out;
+  outline: none;
 
   /* Add spacing between cards */
   margin-top: 20px;
   margin-bottom: 20px; 
   margin-left: 15px;
-  border: 1px solid white;
+  border: 1px solid rgb(0, 0, 0);
   
 }
 
