@@ -42,7 +42,14 @@ const CurrencyConverter = () => {
     if (isNaN(currencyAmount) || currencyAmount <= 0) {
       alert("Please enter a valid amount.");
       return;
+      
     }
+
+    // validate the entered amount is below threshhold
+    if (currencyAmount > 9999999999) {
+      alert("Amount is too large. Please enter a number below 9,999,999,999.");
+      return;
+  }
 
     // Call the currency API for the latest conversion rates
     currencyApi
@@ -165,7 +172,7 @@ const CurrencyConverter = () => {
 
           {/* Amount input field */}
           <label htmlFor="amount-currency">
-            Enter amount: <input id="amount-currency" type="number" />
+            Enter Desired Amount: <input id="amount-currency" type="number" />
           </label>
 
           {/* Dropdowns for selecting currencies */}
@@ -196,13 +203,13 @@ const CurrencyConverter = () => {
             <button className="convert-button" onClick={getConversionRate}>
               Convert
             </button>
-            <p>Converted Amount: {convertedAmount}</p>
+            <p>Last Converted Amount: {convertedAmount}</p>
           </div>
 
           {/* Display recent conversions, if any */}
           {recentConversions.length > 0 && (
             <div className="recent-conversions">
-              <h3>Recent Conversions</h3>
+              <h3>Recent Conversions:</h3>
               <ul>
                 {recentConversions.map((conversion) => (
                   <li key={conversion.id}>
