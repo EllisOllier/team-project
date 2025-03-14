@@ -469,6 +469,13 @@ html, body {
   width: 50%; 
 }
 
+/* Remove bullet points from recent transactions */
+.right-section ul {
+  list-style: none;
+  padding-left: 0; 
+}
+
+
 /* Mobile Responsive: Stack Items */
 @media (max-width: 768px) {
   .dashboard-container {
