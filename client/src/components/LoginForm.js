@@ -10,14 +10,6 @@ const LoginForm = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
-  const [showForm, setShowForm] = useState(true);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      setShowForm(false);
-    }
-  }, [isLoggedIn]);
-
   const checkLogin = async (event) => {
     event.preventDefault();
 
@@ -34,6 +26,7 @@ const LoginForm = () => {
 
       if (response.ok) {
         setErrorMessage('');
+        console.log('Login successful', result);
         localStorage.setItem('userID', result.userID);
         localStorage.setItem('username', result.userUsername);
         setIsLoggedIn(true);
@@ -47,7 +40,7 @@ const LoginForm = () => {
     }
   };
 
-  if (!showForm) {
+  if (isLoggedIn) {
     return null;
   }
 

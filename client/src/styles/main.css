@@ -444,16 +444,50 @@ html, body {
 
 /* Dashboard Main Layout */
 .dashboard-container {
-  padding: 20px;
-  max-width: 900px; /* Increased width for better layout */
-  margin: auto;
-  text-align: center;
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  justify-content: center; /* Aligns items to the center */
+  align-items: flex-start; /* Aligns items to the top */
+  gap: 32px; /* Spacing between left and right sections */
+  max-width: 1000px; /* Prevents everything from being too wide */
+  margin: auto; /* Centers the whole container */
+  padding: 20px;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
+
+/* Left Section (Budget Summary & Quick Actions) */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+/* Right Section (Recent Transactions) */
+.right-section {
+  width: 50%; 
+}
+
+/* Remove bullet points from recent transactions */
+.right-section ul {
+  list-style: none;
+  padding-left: 0; 
+}
+
+
+/* Mobile Responsive: Stack Items */
+@media (max-width: 768px) {
+  .dashboard-container {
+      flex-direction: column; /* Stack on mobile */
+      align-items: center; /* Keep center alignment */
+  }
+
+  .left-section, .right-section {
+    width: 100%;
+    align-items: center;
+}
+}
 
 /* Title Section */
 .dashboard-title {
@@ -467,6 +501,8 @@ html, body {
   font-weight: bold;
 }
 
+
+
 /* Card Layout */
 .card {
   
@@ -474,15 +510,15 @@ html, body {
   padding: 20px;
   border-radius: 20px;
   box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
-  width: 650px; /* Set a fixed width for consistency */
   text-align: center;
   transition: transform 0.2s ease-in-out;
+  outline: none;
 
   /* Add spacing between cards */
   margin-top: 20px;
   margin-bottom: 20px; 
   margin-left: 15px;
-  border: 1px solid white;
+  border: 1px solid rgb(0, 0, 0);
   
 }
 

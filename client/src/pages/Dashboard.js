@@ -103,57 +103,57 @@ const Dashboard = () => {
         <h3>Welcome back{username}! Keep your finances on track. 🚀</h3>
       </div>
 
-      {/* Budget Summary Card */}
-      <div className="card">
-        <h2>Budget Summary</h2>
-        {/* Show remaining budget */}
-        <p><strong>Remaining Budget:</strong> £{remainingBudget}</p>
-        {/* Show total spent */}
-        <p><strong>Total Spent:</strong> £{totalSpent}</p>
-      </div>
+      {/* HI */}
 
-      {/* Recent Transactions Card */}
-      <div className="card">
-        <h2>Recent Transactions</h2>
-        <ul>
-          {/* Display list of recent expenses if there are any */}
-          {expenses.length > 0 ? (
-            expenses.map((expense, index) => (
-              <li key={index}>
-                {/* Show spend date, category, and amount for each expense */}
-                {expense?.spendDate} - {expense?.spendCategory}: £{expense?.spendAmount}
-              </li>
-            ))
-          ) : (
-            // Show message if no expenses found
-            <p>No expenses found</p>
-          )}
-        </ul>
-      </div>
+      <div className="dashboard-container">
+  {/* Left Section: Budget Summary & Quick Actions */}
+  <div className="left-section">
+    <div className="card">
+      <h2>Budget Summary</h2>
+      <p><strong>Remaining Budget:</strong> £{remainingBudget}</p>
+      <p><strong>Total Spent:</strong> £{totalSpent}</p>
+    </div>
 
-      {/* Show "View All Transactions" button if there are more than 5 expenses */}
-      {expenses.length > 5 && (
+    <div className="card">
+      <h2>Quick Actions</h2>
+      <div className="button-container">
         <Link to="/expense-tracker">
-          <button className="dashboard-button">📜 View All Transactions</button>
+          <button className="dashboard-button">💰 Go to Expense Tracker</button>
         </Link>
-      )}
-
-      {/* Quick Actions Section */}
-      <div className="card">
-        <h2>Quick Actions</h2>
-        <div className="button-container">
-          {/* Link to Expense Tracker page */}
+        <Link to="/currency-converter">
+          <button className="dashboard-button">🔄 Open Currency Converter</button>
+        </Link>
+        {/* Show "View All Transactions" button if there are more than 5 expenses */}
+        {expenses.length > 5 && (
           <Link to="/expense-tracker">
-            <button className="dashboard-button">💰 Go to Expense Tracker</button>
+            <button className="dashboard-button">📜 View All Transactions</button>
           </Link>
-
-          {/* Link to Currency Converter page */}
-          <Link to="/currency-converter">
-            <button className="dashboard-button">🔄 Open Currency Converter</button>
-          </Link>
-        </div>
+        )}
       </div>
     </div>
+  </div>
+
+  {/* Right Section: Recent Transactions */}
+  <div className="right-section">
+    <div className="card">
+      <h2>Recent Transactions</h2>
+      <ul>
+        {expenses.length > 0 ? (
+          expenses.map((expense, index) => (
+            <li key={index}>
+              {expense?.spendDate} - {expense?.spendCategory}: £{expense?.spendAmount}
+            </li>
+          ))
+        ) : (
+          <p>No expenses found</p>
+        )}
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+    
+
   );
 };
 
