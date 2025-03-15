@@ -155,6 +155,8 @@ const CurrencyConverter = () => {
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, []);
 
+
+  
   return (
     <div>
       {/* Title section */}
@@ -231,6 +233,8 @@ const CurrencyConverter = () => {
               {previousCalculations.length > 0 ? (
                 previousCalculations.map((calculation, index) => (
                   <li key={index}>{calculation}</li>
+                  
+                  
                 ))
               ) : (
                 <p>No calculations found</p>

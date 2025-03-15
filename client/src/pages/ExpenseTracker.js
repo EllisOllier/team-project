@@ -76,11 +76,6 @@ const ExpenseTracker = () => {
       return; // Exit the function if no category is selected
     }
 
-    if (!spendDate) {
-      alert("Please select a date for the expense.");
-      return; // Exit the function if no date is selected
-    }
-
     try {
       const response = await fetch("http://localhost:8080/api/expenses/add/add-expense", {
         method: "POST",
