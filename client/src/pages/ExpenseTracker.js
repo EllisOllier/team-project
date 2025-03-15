@@ -60,6 +60,27 @@ const ExpenseTracker = () => {
 
   const addExpense = async (event) => {
     event.preventDefault(); // Prevent page reload on form submit
+
+    if (spendAmount <= 0) {
+      alert("Amount is too low, Enter a valid amount"); // Display alert message
+      return; // Exit the function if the amount is invalid
+    }
+
+    if (spendAmount > remainingBudget) {
+      alert(`Amount exceeds the remaining budget. Remaining budget: £${remainingBudget}`);
+      return; // Exit the function if the amount exceeds the remaining budget
+    }
+
+    if (!spendCategory) {
+      alert("Please select a category for the expense.");
+      return; // Exit the function if no category is selected
+    }
+
+    if (!spendDate) {
+      alert("Please select a date for the expense.");
+      return; // Exit the function if no date is selected
+    }
+
     try {
       const response = await fetch("http://localhost:8080/api/expenses/add/add-expense", {
         method: "POST",
@@ -258,6 +279,7 @@ const ExpenseTracker = () => {
                   placeholder="Expense Amount"
                   value={spendAmount}
                   onChange={(e) => updateBudget(e)}
+                  
                 />
                 <select
                   value={spendCategory}
@@ -294,7 +316,7 @@ const ExpenseTracker = () => {
 
             {/* Expenses List */}
             <div className="expense-list-container">
-              <h3>Expense List</h3>
+              <h3>Expense History List</h3>
               <ul>
                 {filteredExpenses.length > 0 ? (
                   filteredExpenses.map((expense, index) => (

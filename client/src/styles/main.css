@@ -8,14 +8,15 @@
 
 .button {
   text-align: center;
-  margin-top: 1.5vh;
+  margin-top: 2.5vh;
   padding: 1vh;
   width: 100vw;
-  max-width: 150px;
+  max-width: 200px;
   border-radius: 20px;
   border: none;
   color: whitesmoke;
   background-color: #1fcc04;
+  font-size: 20px;
 }
 
 #set-budget-container {
@@ -44,6 +45,7 @@
   justify-content: center;
   align-items: center;
   gap: 3vh;
+  text-align: center;
 }
 
 .tracker-cont {
@@ -56,6 +58,9 @@
   border: 1px solid black;
   border-radius: 20px;
   box-shadow: 5px 5px 0px 0px black;
+  width: 26.5%;
+  font-size: 125%;
+  gap: 3px;
 }
 
 .expense-list-container > ul{
@@ -91,6 +96,8 @@
   color: whitesmoke;
   padding: 1.5vh;
   margin-bottom: 3vh;
+  width: 20%;
+  font-size: 125%;
 }
 
 #reset-button:hover {
