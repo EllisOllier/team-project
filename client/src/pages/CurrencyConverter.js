@@ -131,32 +131,6 @@ const CurrencyConverter = () => {
     }
   };
 
-  // useEffect hook to handle key presses for calculator input
-  useEffect(() => {
-    const handleKeyPress = (event) => {
-      const { key } = event;
-
-      // Check for valid calculator input keys (numbers, operators, decimal)
-      if (/[0-9+\-*/.]/.test(key)) {
-        handleCalcInput(key);
-      } else if (key === "Backspace") {
-        // Remove last character on Backspace
-        setCalcInput((prev) => prev.slice(0, -1));
-      } else if (key === "Escape") {
-        // Clear calculator on Escape
-        clearCalculator();
-      }
-    };
-
-    // Attach the event listener when the component mounts
-    window.addEventListener("keydown", handleKeyPress);
-
-    // Clean up the event listener on unmount
-    return () => window.removeEventListener("keydown", handleKeyPress);
-  }, []);
-
-
-  
   return (
     <div>
       {/* Title section */}
@@ -233,8 +207,6 @@ const CurrencyConverter = () => {
               {previousCalculations.length > 0 ? (
                 previousCalculations.map((calculation, index) => (
                   <li key={index}>{calculation}</li>
-                  
-                  
                 ))
               ) : (
                 <p>No calculations found</p>
