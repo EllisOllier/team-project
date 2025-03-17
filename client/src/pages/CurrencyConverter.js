@@ -174,7 +174,7 @@ const CurrencyConverter = () => {
 
           {/* Amount input field */}
           <label htmlFor="amount-currency">
-            Enter Desired Amount: <input id="amount-currency" type="number" />
+            Enter Amount: <input id="amount-currency" type="number" />
           </label>
 
           {/* Dropdowns for selecting currencies */}
@@ -205,7 +205,7 @@ const CurrencyConverter = () => {
             <button className="convert-button" onClick={getConversionRate}>
               Convert
             </button>
-            <p>Last Converted Amount: {convertedAmount}</p>
+            <p>Converted Amount: {convertedAmount}</p>
           </div>
 
           {/* Display recent conversions, if any */}
