@@ -34,25 +34,25 @@ const Home = () => {
         <div className='feature-container'>
 
           {/* Feature 1: Track Expenses */}
-          <div className='feature' onClick={() => navigate("/expense-tracker")}>
+          <div className='feature' >
             <h3>Track Expenses</h3>
             <p>Keep track of your expenses and see where your money is going.</p>
           </div>
 
           {/* Feature 2: Convert Currencies */}
-          <div className='feature' onClick={() => navigate("/currency-converter")}>
+          <div className='feature' >
             <h3>Convert Currencies</h3>
             <p>Convert currencies on the fly to see how much you are spending.</p>
           </div>
 
           {/* Feature 3: Budget Forecasting */}
-          <div className='feature' onClick={() => navigate("/expense-tracker")}>
+          <div className='feature' >
             <h3>Budget Forecasting</h3>
             <p>See how much you are projected to spend and how much you have left.</p>
           </div>
 
           {/* Feature 4: Financial Goals */}
-          <div className='feature' onClick={() => navigate("/expense-tracker")}>
+          <div className='feature' >
             <h3>Financial Goals</h3>
             <p>Set financial goals and track your progress.</p>
           </div>
