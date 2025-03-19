@@ -77,8 +77,8 @@ const ExpenseTracker = () => {
     }
 
     if (!spendDate) {
-      alert("Please select a date for the expense.");
-      return; // Exit the function if no date is selected
+      alert("Please enter a date for the expense.");
+      return; // Exit the function if no date is entered
     }
 
     try {

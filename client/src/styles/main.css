@@ -8,16 +8,16 @@
 
 .button {
   text-align: center;
-  margin-top: 2.5vh;
+  margin-top: 1.5vh;
   padding: 1vh;
   width: 100vw;
-  max-width: 200px;
+  max-width: 150px;
   border-radius: 20px;
   border: none;
   color: whitesmoke;
   background-color: #1fcc04;
-  font-size: 20px;
 }
+
 
 #set-budget-container {
   display: flex;
@@ -104,6 +104,7 @@
 
 #reset-button:hover {
   background-color: darkred;
+  transform: scale(1.15);
 }
 
 #reset-button:active {
@@ -191,6 +192,22 @@
     align-items: center;
     width: 100%;
   }
+
+  .navbar-list {
+    flex-direction: column;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+  }
+
+  .navbar-item {
+    width: 100%;
+    text-align: center; /* Center text */
+  }
+
+  .navbar-item:last-child {
+    margin-left: 0;
+    text-align: center;
+  }
 }
 
 html, body {
@@ -271,7 +288,8 @@ html, body {
 .signup-button:hover,
 #login-button:hover,
 .button:hover {
-  background-color: #19a603;
+  background-color: #37802e;
+  transform: scale(1.10);
 }
 
 .signup-button:active,
@@ -289,9 +307,17 @@ html, body {
   background-color: #1fcc04;
 }
 
+#login-button:hover{
+  transform: scale(1.15);
+}
+
 .logout-icon {
   color: white;
   font-size: 20px;
+}
+
+.logout-icon:hover {
+  transform: scale(1.15);
 }
 
 /* Feature styles */
@@ -324,6 +350,10 @@ html, body {
   padding: 0px 20px 20px 20px;
   border-radius: 20px;
   box-shadow: 5px 5px 0px 0px black;
+}
+
+.feature:hover{
+  transform: scale(1.05); /* Slight pop effect */
 }
 
 .feature h3 {
@@ -427,11 +457,12 @@ html, body {
 }
 
 .currency-converter-container {
-  width: 25%;
   border: 1px solid black;
-  border-radius: 30px;
-  padding: 30px;
+  border-radius: 20px;
+  padding: 20px;
   box-shadow: 5px 5px 0px 0px black;
+  width: 100%;
+  max-width: 450px;
 }
 
 .currency-output-container {
@@ -450,13 +481,17 @@ html, body {
 .convert-button {
   text-align: center;
   padding: 0.5rem;
-  width: 40%;
+  width: 25%;
   max-width: 150px;
   border-radius: 20px;
   border: none;
   color: whitesmoke;
   background-color: #1fcc04;
-  font-size: 20px;
+}
+
+.convert-button:hover{
+  transform: scale(1.15);
+  background-color: #257418;
 }
 
 #converted-amount {
@@ -654,7 +689,8 @@ html, body {
 }
 
 .dashboard-button:hover {
-  background-color: #19a603;
+  background-color: #2f7a23;
+  transform: scale(1.10);
 }
 
 /* Responsive Design */
@@ -681,6 +717,7 @@ html, body {
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;
 }
+
 
 .calculator-buttons button {
   padding: 10px;
@@ -809,6 +846,7 @@ body {
 
 .dark-mode .toggle-button:hover {
   background-color: #777;
+  transform: scale(1.05);
 }
 
 .dark-mode .title-container {
