@@ -1,6 +1,7 @@
 // Import necessary files
 import React, { useState, useEffect } from "react"; // React core and hooks
 import { Link } from "react-router-dom"; // For navigation links within the app
+import BudgetChart from "../components/BudgetChart"; // Imports the BudgetChart component
 
 // Define the Dashboard component
 const Dashboard = () => {
@@ -148,6 +149,13 @@ const Dashboard = () => {
           <p>No expenses found</p>
         )}
       </ul>
+    </div>
+    
+    {/* Expense Overview */}
+    {/* Display the BudgetChart component with the expenses prop */}
+    <div className="card"> 
+      <h2>Expense Overview</h2> 
+      <BudgetChart expenses={expenses}/> {/* Pass the expenses array to the BudgetChart component */}
     </div>
   </div>
 </div>
