@@ -12,8 +12,8 @@ const BudgetChart = ({expenses}) => {
         if (expenses.length > 0) {
             //calculate the total amount spent in each category
             const expenseSummary = expenses.reduce((acc, expense) => {
-                const category = expense.category || "other"; //if the category is not defined, it will be set to "other"
-                const amount = Number(expense.amount); //Makes sure the amount is a number
+                const category = expense.spendCategory || "other"; //if the category is not defined, it will be set to "other"
+                const amount = Number(expense.spendAmount); //Makes sure the amount is a number
 
                 //if the category is not in the accumulator, it will be added with a total of 0
                 if (!acc[category]) {
@@ -29,7 +29,8 @@ const BudgetChart = ({expenses}) => {
         }
     }, [expenses]); //runs the effect when the expenses prop changes
 
-
+console.log("Chart data is going to Recharts: ", chartData);
+    //returns the JSX for the BudgetChart component
     return (
         <div className="chart-container">
             <h2>Expense Breakdown</h2>
@@ -40,7 +41,7 @@ const BudgetChart = ({expenses}) => {
                     <YAxis /> {/* YAxis component displays the total amount spent */}
                     <Tooltip /> {/* Tooltip component shows the category and total amount spent when hovering over a bar */}
                     <Legend /> {/* Legend component displays the category names */}
-                    <Bar dataKey="total" fill="#8884d8" /> {/* Bar component displays the total amount spent in each category */}
+                    <Bar dataKey="total" fill="#1fcc04" /> {/* Bar component displays the total amount spent in each category */}
                 </BarChart>
             </ResponsiveContainer>
         </div>

@@ -5,7 +5,8 @@ const ExpenseTracker = () => {
   // State Variables
 
   // User and Expense data
-  const [userID, setUserID] = useState(localStorage.getItem("userID")); // Get user ID from localStorage
+  const [userID, setUserID] = useState(() => localStorage.getItem("userID") || ""); // Get user ID from localStorage
+  console.log("User ID: ", userID); // Log user ID to console
   const [spendAmount, setSpendAmount] = useState(""); // Input: amount to spend
   const [spendCategory, setSpendCategory] = useState(""); // Input: category of expense
   const [spendDate, setSpendDate] = useState(""); // Input: date of expense
@@ -85,7 +86,12 @@ const ExpenseTracker = () => {
       const response = await fetch("http://localhost:8080/api/expenses/add/add-expense", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userID, spendAmount, spendCategory, spendDate }),
+        body: JSON.stringify({ 
+          userID, 
+          spendAmount: parseFloat(spendAmount),//Converts to a float(number)
+          spendCategory, 
+          spendDate 
+        }),
       });
 
       const result = await response.json();
