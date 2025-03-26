@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/types": "^7.26.10",
     "@everapi/freecurrencyapi-js": "^1.0.1",
     "@supabase/supabase-js": "^2.48.1",
     "cra-template": "1.2.0",
