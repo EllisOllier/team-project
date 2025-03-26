@@ -47,14 +47,14 @@ const Home = () => {
 
           {/* Feature 3: Budget Forecasting */}
           <div className='feature' >
-            <h3>Budget Forecasting</h3>
-            <p>See how much you are projected to spend and how much you have left.</p>
+            <h3>Calculate Spendings</h3>
+            <p>Use our built in calculator to convert currencies and calculate spendings on the fly.</p>
           </div>
 
           {/* Feature 4: Financial Goals */}
           <div className='feature' >
-            <h3>Financial Goals</h3>
-            <p>Set financial goals and track your progress.</p>
+            <h3>User Dashboard</h3>
+            <p>Head to the dashboard to see all your finances in one place. </p>
           </div>
         </div>
       </div>
