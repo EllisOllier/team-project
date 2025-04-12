@@ -1,5 +1,10 @@
 # Team Project
 
+## Database Structure
+* user (userID, userUsername, userPassword)
+* userBudget (userBudgetID, userID, userBudget)
+* userSpendData (spendID, userID, spendAmount, spendCategory, spendDate)
+
 ## Prerequisites
 ### Software
 * [NodeJS](https://nodejs.org/en)
