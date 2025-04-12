@@ -10,37 +10,6 @@ const app = express();
 
 // Middleware
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.use(morgan("dev"));
 app.use(cors({origin : true, credentials : true}));
 app.use(express.json()); // Add this line to parse JSON request bodies

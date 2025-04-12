@@ -5,7 +5,7 @@ import "../styles/main.css"; // Styles for the component
 
 const CurrencyConverter = () => {
   // Initialize the currency API client with an API key
-  const currencyApi = new Freecurrencyapi("fca_live_7IzkWSy6LsA5XsnsG6t7ldzmhfHHJGG3om5pODDr");
+  const currencyApi = new Freecurrencyapi("add-api-key");
 
   // State to store the list of recent conversions (up to 5 recent conversions)
   const [recentConversions, setRecentConversions] = useState([]);
